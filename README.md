@@ -5,7 +5,7 @@
 - David Fagbo -> up2275576 -> up2275576-dev
 - Jasper Puffett -> up2117614 -> Jpuf
 - George Beare -> up2279690 -> Beare-G
-- Joseph O'Connor -> up2283950
+- Joseph O'Connor -> up2283950 
 - Safia Farah -> up2214501
 - Lem Wilton -> up2276395
 
