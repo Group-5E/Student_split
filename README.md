@@ -9,13 +9,13 @@
 - Safia Farah -> up2214501 -> safiafarahhhh
 - Lem Wilton -> up2276395 -> lemonizite
 
-## Team Divide
-### Data Collection
-- Interviews/Focus Groups
-- Participant information sheet & Consent form
-- User requirements
+## Team Divide - Chapter 1
+### Data Collection -> George, David, Joe, Lem, Baz
+- Interviews/Focus Groups 
+- Participant information sheet & Consent form 
+- User requirements 
 
-### System Requirements
+### System Requirements -> Jasper & Safia
 - Functional Requirements
 - Non-functional Requirements
 
