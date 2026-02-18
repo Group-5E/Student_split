@@ -7,7 +7,20 @@
 - Joseph O'Connor -> up2283950 -> beermechant
 - Lem Wilton ->      up2276395 -> lemonizite
 
-## Team Divide - Chapter 1
+## Team Divide - Iteration 2
+### Refactoring Reqs -> David
+
+### Redesigning Architectural Model -> Lem
+
+### Front-End Development -> Jasper, Joe, Bayleigh, Lem, David
+- UI Design (wireframing and moodboards)
+- HTML, CSS, JavaScript, ReactJs
+
+### Back-End Development -> Jasper, Joe, Bayleigh, Lem, David
+- Database development
+- API Development
+
+## Team Divide - Iteration 1
 ### Data Collection -> Everyone
 - Interviews/Focus Groups 
 - Participant information sheet & Consent form 
