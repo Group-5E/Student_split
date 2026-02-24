@@ -12,11 +12,11 @@
 
 ### Redesigning Architectural Model -> Lem
 
-### Front-End Development -> Bayleigh, Lem, David
+### Front-End Development -> Lem, David, Joe
 - UI Design (wireframing and moodboards)
 - HTML, CSS, JavaScript, ReactJs
 
-### Back-End Development -> Jasper, Joe
+### Back-End Development -> Jasper, Bayleigh
 - Database development
 - API Development
 
