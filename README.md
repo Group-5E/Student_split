@@ -13,7 +13,7 @@
 ### ~~Redesigning Architectural Model -> Lem~~ ✅
 
 ### Front-End Development -> Lem, David, Joe
-~~- UI Design (wireframing and moodboards)~~ ✅
+- ~~UI Design (wireframing and moodboards)~~ ✅
 - HTML, CSS, JavaScript, ReactJs
 
 ### Back-End Development -> Jasper, Bayleigh
