@@ -8,9 +8,9 @@
 - Lem Wilton ->      up2276395 -> lemonizite
 
 ## Team Divide - Iteration 2
-### Refactoring Reqs -> David
+### ~~Refactoring Reqs -> David~~ ✅
 
-### Redesigning Architectural Model -> Lem
+### ~~Redesigning Architectural Model -> Lem~~ ✅
 
 ### Front-End Development -> Lem, David, Joe
 - UI Design (wireframing and moodboards)
