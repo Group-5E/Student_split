@@ -18,7 +18,7 @@
 
 ### Back-End Development -> Jasper, Bayleigh
 - Database development -> Half-completed in SqLite (potential to change)
-~~- API Development~~ ✅
+- ~~API Development~~ ✅
 
 ## ~~Team Divide - Iteration 1~~ ✅
 ### ~~Data Collection -> Everyone~~ ✅
