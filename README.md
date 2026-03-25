@@ -13,12 +13,12 @@
 ### ~~Redesigning Architectural Model -> Lem~~ ✅
 
 ### Front-End Development -> Lem, David, Joe
-- UI Design (wireframing and moodboards)
+~~- UI Design (wireframing and moodboards)~~ ✅
 - HTML, CSS, JavaScript, ReactJs
 
 ### Back-End Development -> Jasper, Bayleigh
-- Database development
-- API Development
+- Database development -> Half-completed in SqLite (potential to change)
+~~- API Development~~ ✅
 
 ## ~~Team Divide - Iteration 1~~ ✅
 ### ~~Data Collection -> Everyone~~ ✅
