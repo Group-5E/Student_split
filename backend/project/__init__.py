@@ -3,7 +3,7 @@ import os
 from flask import Flask
 
 def create_app(config=None):
-    from . import routes
+    from . import models, routes
     app = Flask(__name__)
 
     # load default configuration
@@ -20,6 +20,7 @@ def create_app(config=None):
         elif config.endswith('.py'):
             app.config.from_pyfile(config)
 
+    models.init_app(app)
     routes.init_app(app)
 
     CORS(app, supports_credentials=True, origins=['http://localhost:5173'])
