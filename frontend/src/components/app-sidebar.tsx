@@ -11,6 +11,7 @@ import {
 import { useUser } from "@/hooks/useUser";
 import { Link } from "@tanstack/react-router";
 import { House } from "lucide-react";
+import { NavMain } from "./nav-main";
 
 // Testing Data
 const data = {
@@ -43,7 +44,9 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
       <SidebarHeader>
         <HouseholdSwitcher households={data.households} />
       </SidebarHeader>
-      <SidebarContent></SidebarContent>
+      <SidebarContent>
+        <NavMain />
+      </SidebarContent>
       <SidebarFooter>
         {!user ? (
           <Button>
