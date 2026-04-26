@@ -2,7 +2,7 @@
 
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuShortcut, DropdownMenuTrigger } from "@/components/ui/dropdown-menu"
 import { SidebarMenu, SidebarMenuButton, SidebarMenuItem, useSidebar } from "@/components/ui/sidebar"
-import { Building, Building2, ChevronsUpDown, Plus } from "lucide-react"
+import { Building2, ChevronDown, Plus } from "lucide-react"
 import React from "react"
 
 export function HouseholdSwitcher({
@@ -37,7 +37,7 @@ export function HouseholdSwitcher({
                 <span className="truncate font-medium">{activeHousehold.name}</span>
                 {/*<span className="truncate text-xs">{activeHousehold.plan}</span>*/}
               </div>
-              <ChevronsUpDown className="ml-auto" />
+              <ChevronDown />
             </SidebarMenuButton>
           </DropdownMenuTrigger>
           <DropdownMenuContent
