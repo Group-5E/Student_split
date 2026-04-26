@@ -1,4 +1,5 @@
 import { HouseholdSwitcher } from "@/components/household-switcher";
+import { NavMain } from "@/components/nav-main";
 import { NavUser } from "@/components/nav-user";
 import { Button } from "@/components/ui/button";
 import {
@@ -43,7 +44,9 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
       <SidebarHeader>
         <HouseholdSwitcher households={data.households} />
       </SidebarHeader>
-      <SidebarContent></SidebarContent>
+      <SidebarContent>
+        <NavMain />
+      </SidebarContent>
       <SidebarFooter>
         {!user ? (
           <Button>
