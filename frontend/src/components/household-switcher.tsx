@@ -2,7 +2,7 @@
 
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuShortcut, DropdownMenuTrigger } from "@/components/ui/dropdown-menu"
 import { SidebarMenu, SidebarMenuButton, SidebarMenuItem, useSidebar } from "@/components/ui/sidebar"
-import { ChevronsUpDown, Plus } from "lucide-react"
+import { Building, Building2, ChevronsUpDown, Plus } from "lucide-react"
 import React from "react"
 
 export function HouseholdSwitcher({
@@ -30,7 +30,8 @@ export function HouseholdSwitcher({
               className="data-[state=open]:bg-sidebar-accent data-[state=open]:text-sidebar-accent-foreground"
             >
               <div className="flex aspect-square size-8 items-center justify-center rounded-lg bg-sidebar-primary text-sidebar-primary-foreground">
-                <activeHousehold.logo className="size-4" />
+                {/* <activeHousehold.logo className="size-4" /> */}
+                <Building2 />
               </div>
               <div className="grid flex-1 text-left text-sm leading-tight">
                 <span className="truncate font-medium">{activeHousehold.name}</span>
