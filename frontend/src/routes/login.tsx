@@ -75,20 +75,21 @@ function RouteComponent() {
                   </Field>
                   <Field data-invalid={isPasswordInvalid}>
                     <FieldLabel htmlFor="password">Password</FieldLabel>
-                    {isPasswordInvalid && (
-                      <FieldError>Invalid Password</FieldError>
-                    )}
+
                     <Input
                       aria-invalid={isPasswordInvalid}
                       id="password"
                       type="password"
                       value={password}
                       onChange={(e) => {
-                        setPassword(e.target.value)
+                        setPassword(e.target.value);
                         setIsPasswordInvalid(false);
                       }}
                       required
                     />
+                    {isPasswordInvalid && (
+                      <FieldError>Invalid Password</FieldError>
+                    )}
                   </Field>
                   <Field>
                     <Button
