@@ -9,12 +9,18 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as StatisticsRouteImport } from './routes/statistics'
 import { Route as SignupRouteImport } from './routes/signup'
 import { Route as LoginRouteImport } from './routes/login'
 import { Route as CalenderRouteImport } from './routes/calender'
 import { Route as AccountRouteImport } from './routes/account'
 import { Route as IndexRouteImport } from './routes/index'
 
+const StatisticsRoute = StatisticsRouteImport.update({
+  id: '/statistics',
+  path: '/statistics',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const SignupRoute = SignupRouteImport.update({
   id: '/signup',
   path: '/signup',
@@ -47,6 +53,7 @@ export interface FileRoutesByFullPath {
   '/calender': typeof CalenderRoute
   '/login': typeof LoginRoute
   '/signup': typeof SignupRoute
+  '/statistics': typeof StatisticsRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -54,6 +61,7 @@ export interface FileRoutesByTo {
   '/calender': typeof CalenderRoute
   '/login': typeof LoginRoute
   '/signup': typeof SignupRoute
+  '/statistics': typeof StatisticsRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -62,13 +70,27 @@ export interface FileRoutesById {
   '/calender': typeof CalenderRoute
   '/login': typeof LoginRoute
   '/signup': typeof SignupRoute
+  '/statistics': typeof StatisticsRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/account' | '/calender' | '/login' | '/signup'
+  fullPaths:
+    | '/'
+    | '/account'
+    | '/calender'
+    | '/login'
+    | '/signup'
+    | '/statistics'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/account' | '/calender' | '/login' | '/signup'
-  id: '__root__' | '/' | '/account' | '/calender' | '/login' | '/signup'
+  to: '/' | '/account' | '/calender' | '/login' | '/signup' | '/statistics'
+  id:
+    | '__root__'
+    | '/'
+    | '/account'
+    | '/calender'
+    | '/login'
+    | '/signup'
+    | '/statistics'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -77,10 +99,18 @@ export interface RootRouteChildren {
   CalenderRoute: typeof CalenderRoute
   LoginRoute: typeof LoginRoute
   SignupRoute: typeof SignupRoute
+  StatisticsRoute: typeof StatisticsRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/statistics': {
+      id: '/statistics'
+      path: '/statistics'
+      fullPath: '/statistics'
+      preLoaderRoute: typeof StatisticsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/signup': {
       id: '/signup'
       path: '/signup'
@@ -125,6 +155,7 @@ const rootRouteChildren: RootRouteChildren = {
   CalenderRoute: CalenderRoute,
   LoginRoute: LoginRoute,
   SignupRoute: SignupRoute,
+  StatisticsRoute: StatisticsRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

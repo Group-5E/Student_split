@@ -6,7 +6,7 @@ import {
   SidebarMenuItem,
 } from "@/components/ui/sidebar";
 import { Link } from "@tanstack/react-router";
-import { CalendarDays, CircleUser, Home } from "lucide-react";
+import { CalendarDays, ChartLine, CircleUser, Home } from "lucide-react";
 
 export function NavMain() {
   return (
@@ -52,6 +52,20 @@ export function NavMain() {
               >
                 <CircleUser />
                 Account
+              </Link>
+            </SidebarMenuButton>
+          </SidebarMenuItem>
+          <SidebarMenuItem>
+            <SidebarMenuButton tooltip="statistics" asChild>
+              <Link
+                to="/statistics"
+                activeProps={{
+                  className:
+                    "min-w-8 font-bold bg-primary text-primary-foreground duration-200 ease-linear hover:bg-primary/90 hover:text-primary-foreground active:bg-primary/90 active:text-primary-foreground",
+                }}
+              >
+                <ChartLine />
+                statistics
               </Link>
             </SidebarMenuButton>
           </SidebarMenuItem>
