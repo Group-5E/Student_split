@@ -13,8 +13,13 @@ export default class API {
       body: body ? JSON.stringify(body) : undefined,
     });
 
-    const result = await req.json();
-    return result;
+    if (!req.ok) {
+      const result = await req.json();
+      throw new Error(result.error);
+    } else {
+      const result = await req.json();
+      return result;
+    }
   };
 
   static auth = {
