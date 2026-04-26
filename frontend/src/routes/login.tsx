@@ -43,6 +43,7 @@ function RouteComponent() {
     onError(error) {
       if (error.message === "Invalid credentials") {
         setIsPasswordInvalid(true);
+        setPassword("");
       }
     },
   });
@@ -82,7 +83,10 @@ function RouteComponent() {
                       id="password"
                       type="password"
                       value={password}
-                      onChange={(e) => setPassword(e.target.value)}
+                      onChange={(e) => {
+                        setPassword(e.target.value)
+                        setIsPasswordInvalid(false);
+                      }}
                       required
                     />
                   </Field>
