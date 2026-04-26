@@ -27,10 +27,13 @@ def register():
 def login():
     body = request.get_json()
     user = User.query.filter_by(email=body['email']).first()
-    if not user or not check_password_hash(user.password, body['password']):
-        return jsonify({ 'error': 'Invalid credentials' }), 401
+    if not (user):
+        return jsonify({ 'error': 'user not found' }), 401
+    elif not check_password_hash(user.password, body['password']):
+            return jsonify({ 'error': 'Invalid credentials' }), 401
     login_user(user)
     return jsonify({ 'success': True })
+    
 
 @auth_bp.route('/logout', methods=['POST'])
 @login_required

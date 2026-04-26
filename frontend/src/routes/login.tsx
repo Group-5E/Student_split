@@ -36,6 +36,9 @@ function RouteComponent() {
       queryClient.invalidateQueries({ queryKey: ["me"] });
       navigate({ to: "/" });
     },
+    onError(error, variables, onMutateResult, context) {
+      console.log("Error is", error)
+    },
   });
 
   return (
