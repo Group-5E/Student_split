@@ -9,6 +9,7 @@ import {
 import {
   Field,
   FieldDescription,
+  FieldError,
   FieldGroup,
   FieldLabel,
 } from "@/components/ui/field";
@@ -28,16 +29,21 @@ function RouteComponent() {
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [isPasswordInvalid, setIsPasswordInvalid] = useState(false);
 
   const loginMutation = useMutation({
-    mutationFn: ({ email, password }: { email: string; password: string }) =>
-      API.auth.login(email, password),
+    mutationFn: ({ email, password }: { email: string; password: string }) => {
+      setIsPasswordInvalid(false);
+      return API.auth.login(email, password);
+    },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["me"] });
       navigate({ to: "/" });
     },
-    onError(error, variables, onMutateResult, context) {
-      console.log("Error is", error)
+    onError(error) {
+      if (error.message === "Invalid credentials") {
+        setIsPasswordInvalid(true);
+      }
     },
   });
 
@@ -66,9 +72,13 @@ function RouteComponent() {
                       required
                     />
                   </Field>
-                  <Field>
+                  <Field data-invalid={isPasswordInvalid}>
                     <FieldLabel htmlFor="password">Password</FieldLabel>
+                    {isPasswordInvalid && (
+                      <FieldError>Invalid Password</FieldError>
+                    )}
                     <Input
+                      aria-invalid={isPasswordInvalid}
                       id="password"
                       type="password"
                       value={password}
