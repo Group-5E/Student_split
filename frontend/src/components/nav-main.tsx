@@ -14,12 +14,28 @@ export function NavMain() {
         <SidebarMenu>
           <SidebarMenuItem>
             <SidebarMenuButton tooltip="Home" asChild>
-              <Link to="/">Home</Link>
+              <Link
+                to="/"
+                activeProps={{
+                  className:
+                    "min-w-8 font-bold bg-primary text-primary-foreground duration-200 ease-linear hover:bg-primary/90 hover:text-primary-foreground active:bg-primary/90 active:text-primary-foreground",
+                }}
+              >
+                Home
+              </Link>
             </SidebarMenuButton>
           </SidebarMenuItem>
           <SidebarMenuItem>
             <SidebarMenuButton tooltip="Calendar" asChild>
-              <Link to="/calender">Calender</Link>
+              <Link
+                to="/calender"
+                activeProps={{
+                  className:
+                    "min-w-8 font-bold bg-primary text-primary-foreground duration-200 ease-linear hover:bg-primary/90 hover:text-primary-foreground active:bg-primary/90 active:text-primary-foreground",
+                }}
+              >
+                Calender
+              </Link>
             </SidebarMenuButton>
           </SidebarMenuItem>
         </SidebarMenu>
