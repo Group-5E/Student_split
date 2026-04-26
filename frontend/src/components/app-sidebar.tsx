@@ -1,5 +1,4 @@
 import { HouseholdSwitcher } from "@/components/household-switcher";
-import { NavMain } from "@/components/nav-main";
 import { NavUser } from "@/components/nav-user";
 import { Button } from "@/components/ui/button";
 import {
@@ -11,7 +10,7 @@ import {
 } from "@/components/ui/sidebar";
 import { useUser } from "@/hooks/useUser";
 import { Link } from "@tanstack/react-router";
-import { AudioWaveform, Command, GalleryVerticalEnd } from "lucide-react";
+import { House } from "lucide-react";
 
 // Testing Data
 const data = {
@@ -23,15 +22,15 @@ const data = {
   households: [
     {
       name: "Test 1",
-      logo: GalleryVerticalEnd,
+      logo: House,
     },
     {
       name: "Test 2",
-      logo: AudioWaveform,
+      logo: House,
     },
     {
       name: "Test 3",
-      logo: Command,
+      logo: House,
     },
   ],
 };
@@ -44,9 +43,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
       <SidebarHeader>
         <HouseholdSwitcher households={data.households} />
       </SidebarHeader>
-      <SidebarContent>
-        <NavMain />
-      </SidebarContent>
+      <SidebarContent></SidebarContent>
       <SidebarFooter>
         {!user ? (
           <Button>
