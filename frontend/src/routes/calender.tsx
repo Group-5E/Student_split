@@ -37,7 +37,7 @@ function RouteComponent() {
                 <CalendarDayButton day={day} modifiers={modifiers} {...props}>
                   {children}
                   {!modifiers.outside && (
-                    <span>{isWeekend ? "$120" : "$100"}</span>
+                    <span>{isWeekend ? "£120" : "£100"}</span>
                   )}
                 </CalendarDayButton>
               );

@@ -49,7 +49,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
       </SidebarContent>
       <SidebarFooter>
         {!user ? (
-          <Button>
+          <Button asChild>
             <Link to="/login">Login</Link>
           </Button>
         ) : (

@@ -1,4 +1,6 @@
 import { AppSidebar } from "@/components/app-sidebar";
+import { ModeToggle } from "@/components/mode-toggle";
+import { ThemeProvider } from "@/components/theme-provider";
 import {
   SidebarInset,
   SidebarProvider,
@@ -10,17 +12,22 @@ import { TanStackRouterDevtools } from "@tanstack/react-router-devtools";
 
 const RootLayout = () => (
   <>
-    <SidebarProvider defaultOpen={true}>
-      <TooltipProvider>
-        <AppSidebar variant="inset" />
-        <SidebarInset>
-          <header className="sticky top-0 flex h-12 shrink-0 items-center gap-2 transition-[width,height] ease-linear group-has-data-[collapsible=icon]/sidebar-wrapper:h-12 px-4">
-            <SidebarTrigger className="-ml-1" />
-          </header>
-          <Outlet />
-        </SidebarInset>
-      </TooltipProvider>
-    </SidebarProvider>
+    <ThemeProvider defaultTheme="system" storageKey="theme">
+      <SidebarProvider>
+        <TooltipProvider>
+          <AppSidebar variant="inset" />
+          <SidebarInset>
+            <header className="sticky top-0 flex h-12 shrink-0 items-center gap-2 transition-[width,height] ease-linear group-has-data-[collapsible=icon]/sidebar-wrapper:h-12 px-4">
+              <SidebarTrigger className="-ml-1" />
+              <div className="ml-auto">
+                <ModeToggle />
+              </div>
+            </header>
+            <Outlet />
+          </SidebarInset>
+        </TooltipProvider>
+      </SidebarProvider>
+    </ThemeProvider>
     <TanStackRouterDevtools position={"bottom-right"} />
   </>
 );
