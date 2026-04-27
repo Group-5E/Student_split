@@ -37,7 +37,7 @@ export function NavMain() {
                 }}
               >
                 <CalendarDays />
-                Calender
+                Calendar
               </Link>
             </SidebarMenuButton>
           </SidebarMenuItem>
