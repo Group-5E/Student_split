@@ -48,13 +48,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
         <NavMain />
       </SidebarContent>
       <SidebarFooter>
-        {!user ? (
-          <Button asChild>
-            <Link to="/login">Login</Link>
-          </Button>
-        ) : (
-          <NavUser user={user} />
-        )}
+      <NavUser user={user} />
       </SidebarFooter>
       <SidebarRail />
     </Sidebar>
