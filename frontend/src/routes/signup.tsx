@@ -55,7 +55,9 @@ export default function SignupPage() {
       <div className="w-full max-w-sm">
         <Card>
           <CardHeader>
-            <CardTitle>Create an account</CardTitle>
+            <CardTitle>
+              Heya stranger!
+              <br/>Create an account</CardTitle>
             <CardDescription>
               Enter your details below to create an account.
             </CardDescription>
