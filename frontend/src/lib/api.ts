@@ -24,8 +24,12 @@ export default class API {
 
   static auth = {
     me: () => API.req("auth/me"),
-    register: (username: string, email: string, password: string) =>
-      API.req("auth/register", "POST", { name: username, email, password }),
+    register: (
+      username: string,
+      name: string,
+      email: string,
+      password: string,
+    ) => API.req("auth/register", "POST", { username, name, email, password }),
     login: (email: string, password: string) =>
       API.req("auth/login", "POST", { email, password }),
     logout: () => API.req("auth/logout", "POST"),

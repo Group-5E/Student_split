@@ -14,9 +14,10 @@ def register():
     if existing:
         return jsonify({ 'error': 'Email already in use' }), 400
     user = User(
+        username=body['username'],
         name=body['name'],
         email=body['email'],
-        password=generate_password_hash(body['password'])
+        password_hash=generate_password_hash(body['password'])
     )
     db.session.add(user)
     db.session.commit()
@@ -29,7 +30,7 @@ def login():
     user = User.query.filter_by(email=body['email']).first()
     if not (user):
         return jsonify({ 'error': 'user not found' }), 401
-    elif not check_password_hash(user.password, body['password']):
+    elif not check_password_hash(user.password_hash, body['password']):
         return jsonify({ 'error': 'Invalid credentials' }), 401
     login_user(user)
     return jsonify({ 'success': True })
@@ -48,7 +49,7 @@ def me():
     return jsonify({ 'user': {
         'id': current_user.id,
         'email': current_user.email,
-        'name': current_user.name,
+        'username': current_user.username,
     } })
 
 
