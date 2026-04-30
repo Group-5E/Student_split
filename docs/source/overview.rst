@@ -21,7 +21,7 @@ Architecture
 The project follows a lightweight, developer-friendly architecture:
 
 - **Frontend**
-    Built with modern JavaScript tooling, https://react.dev/ and managed using `pnpm`.
+    Built with modern JavaScript tooling, https://react.dev/ and managed using ``pnpm``.
     It handles all user-facing interactions, UI components, and API requests.
 
 - **Backend**
@@ -35,8 +35,8 @@ High-Level Structure
 --------------------
 
 The repository is organised into two main components:
-- `frontend/` - Contains the client-side application and dependencies.
-- `backend/` - Contains the Flask application, routes, models and environment setup.
+- ``frontend/`` - Contains the client-side application and dependencies.
+- ``backend/`` - Contains the Flask application, routes, models and environment setup.
 
 A more detailed breakdown of the folder layout cna be found in the :doc:`project_structure` section.
 
