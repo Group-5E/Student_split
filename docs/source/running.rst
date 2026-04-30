@@ -1,6 +1,6 @@
 
 Running the Application
------------------------
+=======================
 
 Once installation is done, you can move on and run the backend and frontend.
 This page explains how to start both.
