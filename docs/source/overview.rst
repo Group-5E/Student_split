@@ -18,13 +18,13 @@ Student Split aims to provide a simple and intuitive platform for:
 Architecture
 ------------
 
-The project follows a lightweight, developer-friendly architecture:
+The project follows a lightweight, developer-friendly **n-tier architecture**. This helps improve scalability and allows multiple developers to work simultaneously:
 
-- **Frontend**
+- **Frontend (Presentation Tier)**
     Built with modern JavaScript tooling, https://react.dev/ and managed using ``pnpm``.
     It handles all user-facing interactions, UI components, and API requests.
 
-- **Backend**
+- **Backend (Application Tier)**
     A Python Flask application that handles data processing and manages server-side logic.
 
 - **API**
