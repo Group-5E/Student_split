@@ -15,53 +15,64 @@ Install the following:
 - **pnpm**
 - **Git**
 
-If you already have these installed, verify the versions of each with:
-`python --version`
-`node --version`
-`pnpm --version`
+If you already have these installed, verify the versions of each with::
+
+      python --version
+      node --version
+      pnpm --version
 
 Backend Setup (Flask)
 --------------------
 
-1. Navigate to the backend directory:
-`cd backend`
+1. Navigate to the backend directory::
 
-2. Create a virtual environment:
-`python -m venv .venv`
+      cd backend
+
+2. Create a virtual environment::
+
+      python -m venv .venv
 
 3. Activate the virtual environment:
 
-- **Windows**
-`.venv\Scripts\activate`
+    - **Windows**::
 
-- **macOS/Linux**
-`source .venv/bin/activate`
+          .venv\Scripts\activate
 
-4. Install backend packages:
-`pip install -r requirements.txt`
+    - **macOS/Linux**::
+
+          source .venv/bin/activate
+
+4. Install backend packages::
+
+      pip install -r requirements.txt
 
 Frontend Setup (pnpm + React)
 ----------------------------
 
-1. Navigate to the frontend directory
-`cd frontend`
+1. Navigate to the frontend directory::
 
-2. Install pnpm:
-`pnpm install`
+      cd frontend
 
-3. Make sure you can run the server:
-`pnpm run dev`
+2. Install pnpm::
+
+      pnpm install
+
+3. Make sure you can run the server::
+
+      pnpm run dev
 
 Running the Application
 -----------------------
 
 Once you have completed the above steps, do the following:
 
-- Start the **backend**:
-`flask run`
+- Start the **backend**::
 
-- Start the **frontend**:
-`pnpm run dev`
+      flask run
+
+- Start the **frontend**::
+
+      pnpm run dev
 
 The frontend will communicate with the backend through the configured API
 
