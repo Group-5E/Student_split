@@ -75,4 +75,4 @@ Once installation is complete, visit one of the following pages:
 
 - :doc:`running` - Learn how to run both services together
 - :doc:`project_structure` - Understand the organisation of the repository
-- :doc:`backend_api` - Learn about the backend API 
+- :doc:`backend_api` - Learn about the backend API
