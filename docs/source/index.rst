@@ -22,8 +22,4 @@ Use the navigation to explore the different sections, including setup instructio
    backend_api
    contributing
 
-Indices and tables
-==================
 
-* :ref:`genindex`
-* :ref:`search`

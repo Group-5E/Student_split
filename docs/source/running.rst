@@ -14,9 +14,7 @@ Start the backend from the ``backend`` directory::
     flask run 
 
 By default, the backend will run on:
-http://127.0.0.1:5000 
-OR 
-http://127.0.0.1 in Bing
+http://127.0.0.1
 
 Frontend (React + pnpm)
 -----------------------
@@ -27,7 +25,7 @@ Start the frontend from the ``frontend`` directory::
     pnpm run dev 
 
 The frontend typically runs on:
-http://localhost:5173 
+http://127.0.0.1
 
 Running Both Together
 ---------------------
