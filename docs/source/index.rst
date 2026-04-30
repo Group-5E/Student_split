@@ -15,3 +15,10 @@ documentation for details.
    :maxdepth: 2
    :caption: Contents:
 
+   overview
+   installation
+   project_structure
+   backend_api
+   contributing
+
+
