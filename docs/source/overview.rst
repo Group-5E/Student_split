@@ -56,4 +56,4 @@ If you're new to the project, start with:
 
 1. :doc:`installation` - Set up the environment
 2. :doc:`running` - Learn how to run the frontend and backend together
-3. :doc:`backend_api` - Learn about the backend API 
+3. :doc:`backend_api` - Learn about the backend API
