@@ -27,6 +27,7 @@ export default function SignupPage() {
   const navigate = useNavigate();
 
   const [username, setUsername] = useState("");
+  const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   // const [confirmPassword, setConfirmPassword] = useState("");
@@ -34,13 +35,15 @@ export default function SignupPage() {
   const signupMutation = useMutation({
     mutationFn: ({
       username,
+      name,
       email,
       password,
     }: {
       username: string;
+      name: string;
       email: string;
       password: string;
-    }) => API.auth.register(username, email, password),
+    }) => API.auth.register(username, name, email, password),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["me"] });
       navigate({ to: "/" });
@@ -52,7 +55,9 @@ export default function SignupPage() {
       <div className="w-full max-w-sm">
         <Card>
           <CardHeader>
-            <CardTitle>Create an account</CardTitle>
+            <CardTitle>
+              Heya stranger!
+              <br/>Create an account</CardTitle>
             <CardDescription>
               Enter your details below to create an account.
             </CardDescription>
@@ -68,6 +73,18 @@ export default function SignupPage() {
                     placeholder="BigJohn69"
                     onChange={(e) => setUsername(e.target.value)}
                     value={username}
+                    autoComplete="off"
+                    required
+                  />
+                </Field>
+                <Field>
+                  <FieldLabel htmlFor="name">Name</FieldLabel>
+                  <Input
+                    id="name"
+                    type="text"
+                    placeholder="John Doe"
+                    onChange={(e) => setName(e.target.value)}
+                    value={name}
                     autoComplete="off"
                     required
                   />
@@ -119,7 +136,12 @@ export default function SignupPage() {
                       type="submit"
                       onClick={(e) => {
                         e.preventDefault();
-                        signupMutation.mutate({ username, email, password });
+                        signupMutation.mutate({
+                          username,
+                          name,
+                          email,
+                          password,
+                        });
                       }}
                     >
                       Create Account

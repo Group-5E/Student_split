@@ -1,4 +1,5 @@
 import { AppSidebar } from "@/components/app-sidebar";
+import { Show } from "@/components/auth";
 import { ModeToggle } from "@/components/mode-toggle";
 import { ThemeProvider } from "@/components/theme-provider";
 import {
@@ -15,10 +16,14 @@ const RootLayout = () => (
     <ThemeProvider defaultTheme="system" storageKey="theme">
       <SidebarProvider>
         <TooltipProvider>
-          <AppSidebar variant="inset" />
+          <Show when="signed-in">
+            <AppSidebar variant="inset" />
+          </Show>
           <SidebarInset>
             <header className="sticky top-0 flex h-12 shrink-0 items-center gap-2 transition-[width,height] ease-linear group-has-data-[collapsible=icon]/sidebar-wrapper:h-12 px-4">
-              <SidebarTrigger className="-ml-1" />
+              <Show when="signed-in">
+                <SidebarTrigger className="-ml-1" />
+              </Show>
               <div className="ml-auto">
                 <ModeToggle />
               </div>

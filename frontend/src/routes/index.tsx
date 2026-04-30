@@ -1,30 +1,60 @@
 import { useUser } from "@/hooks/useUser";
-import API from "@/lib/api";
-import { useQuery } from "@tanstack/react-query";
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, Link } from "@tanstack/react-router";
+import { Button } from "@/components/ui/button";
+import {Show } from '@/components/auth';
+import { Card, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 
 function Index() {
   const { user } = useUser();
-
-  const hello = useQuery({
-    queryKey: ["hello"],
-    queryFn: () => API.req("posts/hello", "POST", { text: "from Flask" }),
-  });
+  const date = new Date();
+  const month = date.toLocaleString('default', {month: 'long'})
 
   return (
-    <div className="w-full flex flex-col items-center justify-center gap-12 px-4 py-16">
-      <div className="flex flex-col items-center gap-2">
-        <p className="text-2xl dark:text-white">
-          {hello ? hello.data : "Loading query..."}
-        </p>
+    <div className="w-full h-full flex flex-col items-center justify-center gap-12 px-4 py-16">
+      <Show when = "signed-out">
+        <Card className="w-64 max-w-sm">
+          <CardHeader>
+            <CardTitle className="justify-center items-center flex flex-col">
+              welcome to student split
+            </CardTitle>
+          </CardHeader>
+          <CardFooter className="flex-col gap-2">
+            <Button className="w-full" asChild>
+              <Link to="/login">Login</Link>
+            </Button>
+            <Button className="w-full" asChild>
+              <Link to="/signup">Sign Up</Link>
+            </Button>
+          </CardFooter>
+        </Card>
+      </Show>
 
+      <Show when = "signed-in">
+        <Card className="flex w-full h-full flex-row gap-5 px-5 py-5">
+          <Card>
+            <CardTitle>
+              next payment
+            </CardTitle>
+          </Card>
+          <Card>
+            <CardTitle>
+              {month+" breakdown"}
+            </CardTitle>
+          </Card>
+          <Card>
+            <CardTitle>
+              you're running out of
+            </CardTitle>
+          </Card>
+
+        </Card>
+      </Show>
         <div className="flex flex-col items-center justify-center gap-4">
           <p className="text-center text-2xl dark:text-white">
-            {user && <span>Logged in as {user?.name}</span>}
+            {user && <span>Logged in as {user?.username}</span>}
           </p>
         </div>
       </div>
-    </div>
   );
 }
 
