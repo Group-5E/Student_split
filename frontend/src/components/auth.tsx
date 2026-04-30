@@ -7,13 +7,15 @@ export const Show = ({
   children: React.ReactNode;
   when: "signed-in" | "signed-out";
 }) => {
-  const { isAuthenticated } = useUser();
+  const { isAuthenticated, isLoading } = useUser();
+
+  if (isLoading) return null;
 
   if (isAuthenticated && when === "signed-in") {
-    return <div>{children}</div>;
+    return <>{children}</>;
   }
 
   if (!isAuthenticated && when === "signed-out") {
-    return <div>{children}</div>;
+    return <>{children}</>;
   }
 };

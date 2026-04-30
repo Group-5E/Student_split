@@ -1,14 +1,15 @@
 import API from "@/lib/api";
-import { useQuery } from "@tanstack/react-query";
+import { queryOptions, useQuery } from "@tanstack/react-query";
+
+export const meQueryOptions = queryOptions({
+  queryKey: ["me"],
+  queryFn: () => API.auth.me(),
+  retry: false,
+  staleTime: Infinity,
+});
 
 export function useUser() {
-  const { data, isLoading } = useQuery({
-    queryKey: ["me"],
-    queryFn: () => API.auth.me(),
-    retry: false,
-    staleTime: Infinity,
-  });
-
+  const { data, isLoading } = useQuery(meQueryOptions);
   return {
     user: data?.user ?? null,
     isLoading,
