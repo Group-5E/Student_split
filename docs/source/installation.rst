@@ -30,6 +30,7 @@ Backend Setup (Flask)
 `python -m venv .venv`
 
 3. Activate the virtual environment:
+
 - **Windows**
 `.venv\Scripts\activate`
 
