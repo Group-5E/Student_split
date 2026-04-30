@@ -29,7 +29,7 @@ Start the frontend from the ``frontend`` directory::
 The frontend typically runs on:
 http://localhost:5173 
 
-Running Both Together 
+Running Both Together
 ---------------------
 
 To run the whole application altogether:
