@@ -1,12 +1,12 @@
-Overview 
+Overview
 ========
 
-Student Split is a full-stack web-based application designed to streamline the process of planning, organising and managing household expenses, as well as splitting household tasks. 
+Student Split is a full-stack web-based application designed to streamline the process of planning, organising and managing household expenses, as well as splitting household tasks.
 The project is build using a modern, streamlined frontend powered by **pnpm** and a backend implemented with **Flask**.
 
 This page is designed to give a high-level understanding of the system, its purpose, and how everything fits together.
 
-Purpose 
+Purpose
 -------
 
 Student Split aims to provide a simple and intuitive platform for:
@@ -31,7 +31,7 @@ The project follows a lightweight, developer-friendly **n-tier architecture**. T
     The frontend communicates with the backend via HTTP requests.
     This seperation allows each part of the system to be developed and deployed independently.
 
-High-Level Structure 
+High-Level Structure
 --------------------
 
 The repository is organised into two main components:
@@ -40,7 +40,7 @@ The repository is organised into two main components:
 
 A more detailed breakdown of the folder layout cna be found in the :doc:`project_structure` section.
 
-Key Features 
+Key Features
 ------------
 
 - Clear seperation between frontend and backend

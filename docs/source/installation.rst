@@ -1,4 +1,4 @@
-Installation 
+Installation
 ============
 
 This guide walks you through setting up the Student Split development environment, which includes setting up the frontend and the backend.
@@ -62,7 +62,7 @@ Once you have completed the above steps, do the following:
 - Start the **frontend**:
 `pnpm run dev`
 
-The frontend will communicate with the backend through the configured API 
+The frontend will communicate with the backend through the configured API
 
 Troubleshooting
 ---------------
