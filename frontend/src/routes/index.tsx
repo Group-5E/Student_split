@@ -6,6 +6,8 @@ import { Card, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 
 function Index() {
   const { user } = useUser();
+  const date = new Date();
+  const month = date.toLocaleString('default', {month: 'long'})
 
   return (
     <div className="w-full h-full flex flex-col items-center justify-center gap-12 px-4 py-16">
@@ -24,6 +26,27 @@ function Index() {
               <Link to="/signup">Sign Up</Link>
             </Button>
           </CardFooter>
+        </Card>
+      </Show>
+
+      <Show when = "signed-in">
+        <Card className="flex w-full h-full flex-row gap-5 px-5 py-5">
+          <Card>
+            <CardTitle>
+              next payment
+            </CardTitle>
+          </Card>
+          <Card>
+            <CardTitle>
+              {month+" breakdown"}
+            </CardTitle>
+          </Card>
+          <Card>
+            <CardTitle>
+              you're running out of
+            </CardTitle>
+          </Card>
+
         </Card>
       </Show>
         <div className="flex flex-col items-center justify-center gap-4">
