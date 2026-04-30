@@ -10,7 +10,7 @@ import { CalendarDays, ChartLine, CircleUser, Home } from "lucide-react";
 
 export function NavMain() {
   return (
-    <SidebarGroup>
+    <SidebarGroup className="gap-2">
       <SidebarGroupContent className="flex flex-col gap-2">
         <SidebarMenu>
           <SidebarMenuItem>

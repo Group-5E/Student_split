@@ -7,8 +7,11 @@ import {
   SidebarProvider,
   SidebarTrigger,
 } from "@/components/ui/sidebar";
+import { Spinner } from "@/components/ui/spinner";
 import { TooltipProvider } from "@/components/ui/tooltip";
-import { createRootRoute, Outlet } from "@tanstack/react-router";
+import { meQueryOptions } from "@/hooks/useUser";
+import type { QueryClient } from "@tanstack/react-query";
+import { createRootRouteWithContext, Outlet } from "@tanstack/react-router";
 import { TanStackRouterDevtools } from "@tanstack/react-router-devtools";
 
 const RootLayout = () => (
@@ -20,7 +23,7 @@ const RootLayout = () => (
             <AppSidebar variant="inset" />
           </Show>
           <SidebarInset>
-            <header className="sticky top-0 flex h-12 shrink-0 items-center gap-2 transition-[width,height] ease-linear group-has-data-[collapsible=icon]/sidebar-wrapper:h-12 px-4">
+            <header className="sticky top-0 flex h-12 z-1000 shrink-0 items-center gap-2 transition-[width,height] ease-linear group-has-data-[collapsible=icon]/sidebar-wrapper:h-12 px-4">
               <Show when="signed-in">
                 <SidebarTrigger className="-ml-1" />
               </Show>
@@ -48,7 +51,13 @@ const NotFound = () => (
   </div>
 );
 
-export const Route = createRootRoute({
-  component: RootLayout,
-  notFoundComponent: NotFound,
-});
+export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
+  {
+    component: RootLayout,
+    notFoundComponent: NotFound,
+    pendingComponent: () => <Spinner />,
+    beforeLoad: async ({ context: { queryClient } }) => {
+      await queryClient.ensureQueryData(meQueryOptions);
+    },
+  },
+);
