@@ -17,6 +17,7 @@ Use the navigation to explore the different sections, including setup instructio
 
    overview
    installation
+   running
    project_structure
    backend_api
    contributing

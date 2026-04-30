@@ -61,27 +61,10 @@ Frontend Setup (pnpm + React)
 
       pnpm run dev
 
-Running the Application
------------------------
-
-Once you have completed the above steps, do the following:
-
-- Start the **backend**::
-
-      flask run
-
-- Start the **frontend**::
-
-      pnpm run dev
-
-The frontend will communicate with the backend through the configured API
-
 Troubleshooting
 ---------------
 
 - If anything fails to install, ensure your Node and Python versions are correct, as listed above.
-- If the backend does not start, ensure your virtual environment is active.
-- If the frontend cannot reach the backend, check the API URL in your config.
 
 Once installation is complete, visit one of the following pages:
 
