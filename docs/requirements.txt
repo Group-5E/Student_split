@@ -16,3 +16,5 @@ pycparser==3.0
 sqlalchemy==2.0.49
 typing-extensions==4.15.0
 werkzeug==3.1.8
+sphinx 
+sphinx-rtd-theme 
