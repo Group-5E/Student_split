@@ -1,23 +1,23 @@
-FAQ 
+FAQ
 ===
 
 This page answers common questions about **Student Split**, covering the backend, frontend and documentation.
 
-General Questions 
+General Questions
 -----------------
 
-What is Student Split 
+What is Student Split
 ~~~~~~~~~~~~~~~~~~~~~
 
 Student Split is a full-stack application designed to help students manage shared expenses, track household bill payments, and organise household finances.
 It consists of a Flask backend, a ReactJS frontend, and Sphinx-based documentation.
 
-Who is this project for 
+Who is this project for
 ~~~~~~~~~~~~~~~~~~~~~~~
 
 Whilst this project is still undergoing development, it is mostly intended for potential developers and anyone interested in learning how a modern full-stack application is structured.
 
-Backend Questions 
+Backend Questions
 -----------------
 
 Why Flask instead of anything else
@@ -42,21 +42,21 @@ Details coming soon.
 Frontend Questions 
 ------------------
 
-Why Vite instead of something else 
+Why Vite instead of something else
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Vite provides: 
 
-- Faster development server startup 
+- Faster development server startup
 - Better TypeScript support
-- Modern tooling with minimal configuration 
+- Modern tooling with minimal configuration
 
-Where do I add new pages or components 
+Where do I add new pages or components
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Frontend structure: 
 
 - Components -> ``frontend/src/components``
 - Hooks -> ``frontend/src/hooks``
-- Routes -> ``frontend/src/routes`` 
+- Routes -> ``frontend/src/routes``
 - Styles -> ``frontend/src/styles``
