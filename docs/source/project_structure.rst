@@ -60,18 +60,23 @@ Below is the high-level structure of the project::
 
 Backend Structure
 -----------------
+Details coming soon.
 
 Frontend Structure
 ------------------
+Details coming soon.
 
 Documentation Structure
 -----------------------
+Details coming soon.
 
 Root Files
 ----------
+Details coming soon.
 
 How This Supplements the Architecture
 -------------------------------------
+Details coming soon.
 
 Next Steps
 ----------
