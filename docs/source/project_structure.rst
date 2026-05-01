@@ -8,9 +8,8 @@ Repository Layout
 
 Below is the high-level structure of the project::
 
-    student-split/
+    student_split/
       ├── backend/
-      │   ├── .venv/
       │   ├── instance/
       │   │   └── app.db
       │   ├── project/
