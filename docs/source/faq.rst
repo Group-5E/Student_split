@@ -39,13 +39,13 @@ Where is the database stored
 
 Details coming soon.
 
-Frontend Questions 
+Frontend Questions
 ------------------
 
 Why Vite instead of something else
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Vite provides: 
+Vite provides:
 
 - Faster development server startup
 - Better TypeScript support
@@ -54,7 +54,7 @@ Vite provides:
 Where do I add new pages or components
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Frontend structure: 
+Frontend structure:
 
 - Components -> ``frontend/src/components``
 - Hooks -> ``frontend/src/hooks``
