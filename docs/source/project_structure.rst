@@ -6,9 +6,8 @@ This page explains how the project is organised. The project follows an n-tier a
 Repository Layout
 -----------------
 
-Below is the high-level structure of the project:
+Below is the high-level structure of the project::
 
-::
     student-split/
       ├── backend/
       │   ├── .venv/
@@ -65,16 +64,16 @@ Backend Structure
 Frontend Structure
 ------------------
 
-Documentation Structure 
+Documentation Structure
 -----------------------
 
-Root Files 
+Root Files
 ----------
 
-How This Supplements the Architecture 
+How This Supplements the Architecture
 -------------------------------------
 
-Next Steps 
+Next Steps
 ----------
 
 - :doc:`running` - Learn how to run the application 
