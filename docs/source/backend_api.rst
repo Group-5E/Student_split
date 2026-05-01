@@ -7,7 +7,7 @@ The backend is built using Flask and exposes JSON-based endpoints for authentica
 Authentication Model 
 --------------------
 
-The backend uses **Flask-Login** for session-based authentication.
+The backend uses **Flask Login** for session-based authentication.
 
 - When  a user logs in or registers, Flask-Login creates a **secure session cookie**.
 - Clients retain this cookie to remain authenticated.
