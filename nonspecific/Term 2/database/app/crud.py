@@ -80,3 +80,24 @@ def create_household(session: Session, name: str, created_by: int, address: str 
 # --[ This function fetches a household by ID and returns None if not found
 def get_household(session: Session, household_id: int):
     return session.get(Household, household_id)
+
+# --[ UPDATE HOUSEHOLD !!! >
+# --[ This function updates a household's details and only updates inputted fields
+# --[ Only admin members can update household details
+def add_member(session: Session, user_id: int, household_id: int):
+    user = session.get(User, user_id)
+    if not user:
+        return None
+    if not user.allow_multiple_households:
+        existing = session.query(HouseholdMember).filter_by(user_id=user_id, is_active=True).first()
+        if existing:
+            raise ValueError("User is already in a household. Enable allow_multiple_households to join another.")
+    member = HouseholdMember(
+        user_id=user_id,
+        household_id=household_id,
+        role="member"
+    )
+    session.add(member)
+    session.commit()
+    session.refresh(member)
+    return member
