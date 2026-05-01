@@ -24,6 +24,18 @@ def create_user(session: Session, username: str, email: str, password_hash: str,
     session.refresh(user)
     return user
 
-# --[ This function fetches a student account by ID and returns None if not found
+# --[ This function fetches a student account by ID and returns None if not found 
 def get_user(session: Session, user_id: int):
     return session.get(User, user_id)
+
+# --[ This function updates a students account details and only updates inputted fields 
+def update_user(session: Session, user_id: int, **kwargs):
+    user = session.get(User, user_id)
+    if not user:
+        return None
+    for key, value in kwargs.items():
+        setattr(user, key, value)
+    user.last_active_at = datetime.now()
+    session.commit()
+    session.refresh(user)
+    return user
