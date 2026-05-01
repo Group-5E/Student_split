@@ -1,6 +1,6 @@
-# --[ models.py ]~
-# --[ This file defines all of the database tables and views for StudentSplit.
-# --[ This file uses SQLAlchemy ORM with declarative base.
+# --[ models.py ] !!! >~
+# --[ This file defines all of the database tables and views for StudentSplit
+# --[ This file uses SQLAlchemy ORM with declarative base
 
 # --/ !!! >
 # --[ Imports
@@ -14,7 +14,7 @@ from sqlalchemy.sql import func, text
 
 Base = declarative_base()
 
-# --/ !!! >
+# --/ !!! > 
 # --[ This class stores student account information
 # --[ allow_multiple_households is False by default as most students only belong to one household at a time    
 class User(Base):
