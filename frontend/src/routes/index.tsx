@@ -33,19 +33,19 @@ function Index() {
         <Card className="flex w-full h-full flex-row gap-5 px-5 py-5 items-center justify-around *:flex *:w-full *:h-full">
           <Card>
             <CardTitle className="flex items-center justify-center">
-              next payment
+              Next Payment
             </CardTitle>
             <CardContent>
             </CardContent>
           </Card>
           <Card>
             <CardTitle className="flex items-center justify-center">
-              {month + " breakdown"}
+              {month + " Breakdown"}
             </CardTitle>
           </Card>
           <Card>
             <CardTitle className="flex items-center justify-center">
-              you're running out of
+              You're Running Out Of...
             </CardTitle>
           </Card>
 
