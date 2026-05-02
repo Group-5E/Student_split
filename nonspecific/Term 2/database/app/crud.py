@@ -1,6 +1,7 @@
 # --[ crud.py ] !!! >~
 # --[ This file contains all CRUD functions for the StudentSplit database
 # --[ All functions take a SQLAlchemy session as their first argument
+# --[ ------------------------------------ >
 
 # --/ !!! >
 # --[ Imports 
@@ -10,6 +11,7 @@ from datetime import datetime
 
 # --/ !!! >
 # --[ USER CRUD FUNCTIONS
+# --[ ------------------------------------ >
 
 # --[ CREATE USER !!! >
 # --[ This function creates a new student account
@@ -55,6 +57,7 @@ def delete_user(session: Session, user_id: int):
 
 # --/ !!! >
 # --[ HOUSEHOLD CRUD FUNCTIONS
+# --[ ------------------------------------ >
 
 # --[ CREATE HOUSEHOLD !!! >
 # --[ This function creates a new household and adds the creator as an admin member
@@ -119,6 +122,7 @@ def remove_member(session: Session, user_id: int, household_id: int):
 
 # --/ !!! >
 # --[ EXPENSE CRUD FUNCTIONS
+# --[ ------------------------------------ >
 
 # --[ CREATE EXPENSE !!! >
 # --[ This function creates an expense 
@@ -177,6 +181,7 @@ def delete_expense(session: Session, expense_id: int):
 
 # --/ !!! >
 # --[ EXPENSE SPLIT CRUD FUNCTIONS
+# --[ ------------------------------------ >
 
 # --[ SETTLE SPLIT !!! >
 # --[ This function flags an individual split as settled and records the time
@@ -188,3 +193,23 @@ def settle_split(session: Session, split_id: int):
     split.settled_at = datetime.now()
     session.commit()
     return split
+
+# --/ !!! >
+# --[ PAYMENT CRUD FUNCTIONS
+# --[ ------------------------------------ >
+
+# --[ CREATE PAYMENT !!! >
+# --[ This function records a payment from one student to another within a household
+def create_payment(session: Session, household_id: int, payer_id: int, payee_id: int,
+                   amount: float, note: str = None):
+    payment = Payment(
+        household_id=household_id,
+        payer_id=payer_id,
+        payee_id=payee_id,
+        amount=amount,
+        note=note
+    )
+    session.add(payment)
+    session.commit()
+    session.refresh(payment)
+    return payment
