@@ -9,7 +9,7 @@ from sqlalchemy.orm import Session
 from datetime import datetime
 
 # --/ !!! >
-# --[ User CRUD functions
+# --[ USER CRUD FUNCTIONS
 
 # --[ CREATE USER !!! >
 # --[ This function creates a new student account
@@ -54,7 +54,7 @@ def delete_user(session: Session, user_id: int):
     return user
 
 # --/ !!! >
-# --[ Household CRUD functions
+# --[ HOUSEHOLD CRUD FUNCTIONS
 
 # --[ CREATE HOUSEHOLD !!! >
 # --[ This function creates a new household and adds the creator as an admin member
@@ -116,3 +116,43 @@ def remove_member(session: Session, user_id: int, household_id: int):
     member.left_at = datetime.now()
     session.commit()
     return member
+
+# --/ !!! >
+# --[ EXPENSE CRUD FUNCTIONS
+
+# --[ CREATE EXPENSE !!! >
+# --[ This function creates an expense 
+# --[ Automatically generates equal splits for all active household members
+def create_expense(session: Session, household_id: int, paid_by_id: int, description: str,
+                   amount: float, expense_date: datetime, category: str = "other",
+                   split_type: str = "equal", notes: str = None):
+    expense = Expense(
+        household_id=household_id,
+        paid_by_id=paid_by_id,
+        description=description,
+        amount=amount,
+        expense_date=expense_date,
+        category=category,
+        split_type=split_type,
+        notes=notes
+    )
+    session.add(expense)
+    session.flush()  # get expense ID before committing
+
+    # --[ Generates equal splits for all active members:
+    members = session.query(HouseholdMember).filter_by(
+        household_id=household_id,
+        is_active=True
+    ).all()
+    split_amount = round(amount / len(members), 2)
+    for member in members:
+        split = ExpenseSplit(
+            expense_id=expense.id,
+            user_id=member.user_id,
+            amount_owed=split_amount
+        )
+        session.add(split)
+
+    session.commit()
+    session.refresh(expense)
+    return expense
