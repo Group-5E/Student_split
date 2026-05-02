@@ -46,3 +46,83 @@ class HouseholdMember(db.Model):
     # --[ Relationships !!! >
     user      = relationship("User",      back_populates="memberships")
     household = relationship("Household", back_populates="members")
+
+# --[ CREATE HOUSEHOLD !!! >
+# --[ This function creates a new household and adds the creator as an admin member
+def create_household(session: Session, name: str, created_by: int, address: str = None):
+    household = Household(
+        name=name,
+        address=address,
+        created_by=created_by
+    )
+    session.add(household)
+    session.flush()                     # gets the household ID *before* committing
+    member = HouseholdMember(
+        user_id=created_by,
+        household_id=household.id,
+        role="admin"
+    )
+    session.add(member)
+    session.commit()
+    session.refresh(household)
+    return household
+
+# --/ !!! >
+# --[ HOUSEHOLD CRUD FUNCTIONS
+# --[ ------------------------------------ >
+
+# --[ GET HOUSEHOLD !!! >
+# --[ This function fetches a household by ID and returns None if not found
+def get_household(household_id: int):
+    return db.session.get(Household, household_id)
+
+# --[ UPDATE HOUSEHOLD !!! >
+# --[ This function updates a household's details and only updates inputted fields
+# --[ Only admin members can update household details
+def add_member(user_id: int, household_id: int):
+    user = db.session.get(User, user_id)
+    if not user:
+        return None
+    if not user.allow_multiple_households:
+        existing = db.session.query(HouseholdMember).filter_by(user_id=user_id, is_active=True).first()
+        if existing:
+            raise ValueError("User is already in a household. Enable allow_multiple_households to join another.")
+    member = HouseholdMember(
+        user_id=user_id,
+        household_id=household_id,
+        role="member"
+    )
+    db.session.add(member)
+    db.session.commit()
+    db.session.refresh(member)
+    return member
+
+# --[ REMOVE MEMBER !!! >
+# --[ This function removes a member from a household by deactivating their membership
+def remove_member(user_id: int, household_id: int):
+    member = db.session.query(HouseholdMember).filter_by(
+        user_id=user_id,
+        household_id=household_id,
+        is_active=True
+    ).first()
+    if not member:
+        return None
+    member.is_active = False
+    member.left_at = datetime.now()
+    db.session.commit()
+    return member
+
+# --/ !!! >
+# --[ EXPENSE SPLIT CRUD FUNCTIONS
+# --[ ------------------------------------ >
+
+# --[ SETTLE SPLIT !!! >
+# --[ This function flags an individual split as settled and records the time
+def settle_split(split_id: int):
+    split = db.session.get(ExpenseSplit, split_id)
+    if not split:
+        return None
+    split.is_settled = True
+    split.settled_at = datetime.now()
+    db.session.commit()
+    return split

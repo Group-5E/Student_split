@@ -51,3 +51,62 @@ class ExpenseSplit(db.Model):
     # --[ Relationships !!! >
     expense = relationship("Expense", back_populates="splits")
     user    = relationship("User",    back_populates="splits")
+
+# --/ !!! >
+# --[ EXPENSE CRUD FUNCTIONS
+# --[ ------------------------------------ >
+
+# --[ CREATE EXPENSE !!! >
+# --[ This function creates an expense 
+# --[ Automatically generates equal splits for all active household members
+def create_expense(household_id: int, paid_by_id: int, description: str,
+                   amount: float, expense_date: datetime, category: str = "other",
+                   split_type: str = "equal", notes: str = None):
+    expense = Expense(
+        household_id=household_id,
+        paid_by_id=paid_by_id,
+        description=description,
+        amount=amount,
+        expense_date=expense_date,
+        category=category,
+        split_type=split_type,
+        notes=notes
+    )
+    db.session.add(expense)
+    db.session.flush()  # get expense ID before committing
+
+    # --[ Generates equal splits for all active members:
+    members = db.session.query(HouseholdMember).filter_by(
+        household_id=household_id,
+        is_active=True
+    ).all()
+    split_amount = round(amount / len(members), 2)
+    for member in members:
+        split = ExpenseSplit(
+            expense_id=expense.id,
+            user_id=member.user_id,
+            amount_owed=split_amount
+        )
+        db.session.add(split)
+
+    db.session.commit()
+    db.session.refresh(expense)
+    return expense
+
+# --[ GET EXPENSES !!! >
+# --[ This function fetches all expenses for a household except "deleted" expenses
+def get_expenses(household_id: int):
+    return db.session.query(Expense).filter_by(
+        household_id=household_id,
+        is_deleted=False
+    ).all()
+
+# --[ DELETE EXPENSE !!! >
+# --[ This function soft deletes an expense but preserves the record for data purposes
+def delete_expense(expense_id: int):
+    expense = db.session.get(Expense, expense_id)
+    if not expense:
+        return None
+    expense.is_deleted = True
+    db.session.commit()
+    return expense
