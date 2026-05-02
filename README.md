@@ -1,35 +1,48 @@
-# 5E-SETaP-Coursework
+# Required Tools
 
-## Members
-- Bayleigh Graham -> up2036869 -> BayleighGG
-- David Fagbo ->     up2275576 -> up2275576-dev
-- Jasper Puffett ->  up2117614 -> Jpuf
-- Joseph O'Connor -> up2283950 -> beermechant
-- Lem Wilton ->      up2276395 -> lemonizite
+Install pnpm:
+[https://pnpm.io/](https://pnpm.io/)
 
-## Team Divide - Iteration 2
-### ~~Refactoring Reqs -> David~~ ✅
+Install uv:
+[https://docs.astral.sh/uv/](https://docs.astral.sh/uv/)
 
-### ~~Redesigning Architectural Model -> Lem~~ ✅
+# Frontend
 
-### Front-End Development -> Lem, David, Joe
-- ~~UI Design (wireframing and moodboards)~~ ✅
-- HTML, CSS, JavaScript, ReactJs
+Install the required packages for the frontend:
 
-### Back-End Development -> Jasper, Bayleigh
-- Database development -> Half-completed in SqLite (potential to change)
-- ~~API Development~~ ✅
+```bash
+cd frontend
+pnpm install
+```
 
-## ~~Team Divide - Iteration 1~~ ✅
-### ~~Data Collection -> Everyone~~ ✅
-~~- Interviews/Focus Groups~~ ✅
-~~- Participant information sheet & Consent form~~ ✅
+# Backend
 
-### ~~System Requirements -> Everyone~~ ✅
-~~- User requirements~~ ✅
-~~- Functional Requirements~~ ✅
-~~- Non-functional Requirements~~ ✅
+Create a python virtual environment:
 
+```bash
+cd backend
+python -m venv .venv
+.venv\Scripts\activate
+```
 
-## Links
-[Formatting](https://docs.github.com/en/get-started/writing-on-github/getting-started-with-writing-and-formatting-on-github/basic-writing-and-formatting-syntax)
+Install the required packages for the backend:
+
+```bash
+pip install -r requirements.txt
+```
+
+# Running the project
+
+In one terminal run the frontend:
+
+```bash
+cd frontend
+pnpm run dev
+```
+
+And in another terminal run the backend:
+
+```bash
+cd backend
+flask run
+```
