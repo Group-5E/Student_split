@@ -156,3 +156,11 @@ def create_expense(session: Session, household_id: int, paid_by_id: int, descrip
     session.commit()
     session.refresh(expense)
     return expense
+
+# --[ GET EXPENSES !!! >
+# --[ This function fetches all expenses for a household except "deleted" expenses
+def get_expenses(session: Session, household_id: int):
+    return session.query(Expense).filter_by(
+        household_id=household_id,
+        is_deleted=False
+    ).all()
