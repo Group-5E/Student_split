@@ -30,7 +30,7 @@ function Index() {
       </Show>
 
       <Show when = "signed-in">
-        <Card className="flex w-full h-full flex-row gap-5 px-5 py-5">
+        <Card className="flex w-full h-full flex-row gap-5 px-5 py-5 items-center justify-around">
           <Card>
             <CardTitle>
               next payment
