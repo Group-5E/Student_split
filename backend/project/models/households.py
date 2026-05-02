@@ -1,3 +1,4 @@
+from dataclasses import dataclass
 from sqlalchemy.orm import relationship
 from sqlalchemy import Column, Integer, String, ForeignKey, DateTime, Boolean, func, UniqueConstraint
 
@@ -7,6 +8,7 @@ from .base import db
 # --[ This class represents a shared student property, like an apartment or dorm room
 # --[ A household groups students together for expense tracking
 # --[ created_by stores the user who set the household up
+@dataclass
 class Household(db.Model):
     __tablename__ = "households"
 
