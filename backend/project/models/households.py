@@ -1,3 +1,4 @@
+from datetime import datetime
 from dataclasses import dataclass
 from sqlalchemy.orm import relationship
 from sqlalchemy import Column, Integer, String, ForeignKey, DateTime, Boolean, func, UniqueConstraint
@@ -49,22 +50,22 @@ class HouseholdMember(db.Model):
 
 # --[ CREATE HOUSEHOLD !!! >
 # --[ This function creates a new household and adds the creator as an admin member
-def create_household(session: Session, name: str, created_by: int, address: str = None):
+def create_household(name: str, created_by: int, address: str = None):
     household = Household(
         name=name,
         address=address,
         created_by=created_by
     )
-    session.add(household)
-    session.flush()                     # gets the household ID *before* committing
+    db.session.add(household)
+    db.session.flush()                     # gets the household ID *before* committing
     member = HouseholdMember(
         user_id=created_by,
         household_id=household.id,
         role="admin"
     )
-    session.add(member)
-    session.commit()
-    session.refresh(household)
+    db.session.add(member)
+    db.session.commit()
+    db.session.refresh(household)
     return household
 
 # --/ !!! >
@@ -119,6 +120,8 @@ def remove_member(user_id: int, household_id: int):
 # --[ SETTLE SPLIT !!! >
 # --[ This function flags an individual split as settled and records the time
 def settle_split(split_id: int):
+    from project.models.expenses import ExpenseSplit
+    
     split = db.session.get(ExpenseSplit, split_id)
     if not split:
         return None

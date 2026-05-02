@@ -1,3 +1,4 @@
+from datetime import datetime
 from sqlalchemy.orm import relationship
 from sqlalchemy import Column, Integer, String, ForeignKey, DateTime, Boolean, func, UniqueConstraint, CheckConstraint, Numeric, Text
 
@@ -57,7 +58,7 @@ class ExpenseSplit(db.Model):
 # --[ ------------------------------------ >
 
 # --[ CREATE EXPENSE !!! >
-# --[ This function creates an expense 
+# --[ This function creates an expense
 # --[ Automatically generates equal splits for all active household members
 def create_expense(household_id: int, paid_by_id: int, description: str,
                    amount: float, expense_date: datetime, category: str = "other",
@@ -76,6 +77,8 @@ def create_expense(household_id: int, paid_by_id: int, description: str,
     db.session.flush()  # get expense ID before committing
 
     # --[ Generates equal splits for all active members:
+    from project.models.households import HouseholdMember
+    
     members = db.session.query(HouseholdMember).filter_by(
         household_id=household_id,
         is_active=True
