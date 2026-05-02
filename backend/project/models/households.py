@@ -2,7 +2,7 @@ from datetime import datetime
 from dataclasses import dataclass
 from sqlalchemy.orm import relationship
 from sqlalchemy import Column, Integer, String, ForeignKey, DateTime, Boolean, func, UniqueConstraint
-
+from project.models.users import User
 from .base import db
 
 # --/ !!! >
@@ -121,7 +121,7 @@ def remove_member(user_id: int, household_id: int):
 # --[ This function flags an individual split as settled and records the time
 def settle_split(split_id: int):
     from project.models.expenses import ExpenseSplit
-    
+
     split = db.session.get(ExpenseSplit, split_id)
     if not split:
         return None
