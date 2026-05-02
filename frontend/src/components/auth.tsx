@@ -5,17 +5,24 @@ export const Show = ({
   when,
 }: {
   children: React.ReactNode;
-  when: "signed-in" | "signed-out";
+  when: "signed-in" | "signed-out" | "housed" | "homeless";
 }) => {
-  const { isAuthenticated, isLoading } = useUser();
+  const { isAuthenticated, isLoading, hasHousehold} = useUser();
 
   if (isLoading) return null;
 
-  if (isAuthenticated && when === "signed-in") {
-    return <>{children}</>;
-  }
-
-  if (!isAuthenticated && when === "signed-out") {
-    return <>{children}</>;
+  switch (when) {
+    case "signed-in":
+      if (!isAuthenticated) return null;
+      return <>{children}</>;
+    case "signed-out":
+      if (isAuthenticated) return null;
+      return <>{children}</>;
+    case "housed":
+      if (!hasHousehold) return null;
+      return <>{children}</>;
+    case "homeless":
+      if (hasHousehold) return null;
+      return <>{children}</>;
   }
 };

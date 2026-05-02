@@ -2,7 +2,7 @@ import { useUser } from "@/hooks/useUser";
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { Button } from "@/components/ui/button";
 import { Show } from '@/components/auth';
-import { Card, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
+import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 
 function Index() {
   const { user } = useUser();
@@ -32,17 +32,19 @@ function Index() {
       <Show when="signed-in">
         <Card className="flex w-full h-full flex-row gap-5 px-5 py-5 items-center justify-around *:flex *:w-full *:h-full">
           <Card>
-            <CardTitle>
+            <CardTitle className="flex items-center justify-center">
               next payment
             </CardTitle>
+            <CardContent>
+            </CardContent>
           </Card>
           <Card>
-            <CardTitle>
+            <CardTitle className="flex items-center justify-center">
               {month + " breakdown"}
             </CardTitle>
           </Card>
           <Card>
-            <CardTitle>
+            <CardTitle className="flex items-center justify-center">
               you're running out of
             </CardTitle>
           </Card>
