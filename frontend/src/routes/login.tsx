@@ -30,6 +30,7 @@ function RouteComponent() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [isPasswordInvalid, setIsPasswordInvalid] = useState(false);
+  const [isEmailInvalid,setEmailInvalid] = useState(false);
 
   const loginMutation = useMutation({
     mutationFn: ({ email, password }: { email: string; password: string }) => {
@@ -43,6 +44,9 @@ function RouteComponent() {
     onError(error) {
       if (error.message === "Invalid credentials") {
         setIsPasswordInvalid(true);
+        setPassword("");
+      }else if (error.message === 'user not found'){
+        setEmailInvalid(true);
         setPassword("");
       }
     },
@@ -62,16 +66,23 @@ function RouteComponent() {
             <CardContent>
               <form>
                 <FieldGroup>
-                  <Field>
+                  <Field data-invalid={isEmailInvalid}>
                     <FieldLabel htmlFor="email">Email</FieldLabel>
                     <Input
+                      aria-invalid={isEmailInvalid}
                       id="email"
                       type="email"
                       value={email}
-                      onChange={(e) => setEmail(e.target.value)}
+                      onChange={(e) => {
+                        setEmail(e.target.value)
+                        setEmailInvalid(false)
+                      }}
                       placeholder="m@example.com"
                       required
                     />
+                    {isEmailInvalid && (
+                      <FieldError>Email not found! </FieldError>
+                    )}
                   </Field>
                   <Field data-invalid={isPasswordInvalid}>
                     <FieldLabel htmlFor="password">Password</FieldLabel>
@@ -88,7 +99,7 @@ function RouteComponent() {
                       required
                     />
                     {isPasswordInvalid && (
-                      <FieldError>Invalid Password</FieldError>
+                      <FieldError>Invalid Password! </FieldError>
                     )}
                   </Field>
                   <Field>

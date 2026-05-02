@@ -1,13 +1,13 @@
-import { Show } from "@/components/auth";
-import { Button } from "@/components/ui/button";
-import { Card, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { useUser } from "@/hooks/useUser";
 import { createFileRoute, Link } from "@tanstack/react-router";
+import { Button } from "@/components/ui/button";
+import { Show } from '@/components/auth';
+import { Card, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 
 function Index() {
   const { user } = useUser();
   const date = new Date();
-  const month = date.toLocaleString("default", { month: "long" });
+  const month = date.toLocaleString('default', { month: 'long' })
 
   return (
     <div className="w-full h-full flex flex-col items-center justify-center gap-12 px-4 py-16">
@@ -30,16 +30,23 @@ function Index() {
       </Show>
 
       <Show when="signed-in">
-        <Card className="flex w-full h-full flex-row gap-5 px-5 py-5 items-center justify-around">
+        <Card className="flex w-full h-full flex-row gap-5 px-5 py-5 items-center justify-around *:flex *:w-full *:h-full">
           <Card>
-            <CardTitle>next payment</CardTitle>
+            <CardTitle>
+              next payment
+            </CardTitle>
           </Card>
           <Card>
-            <CardTitle>{month + " breakdown"}</CardTitle>
+            <CardTitle>
+              {month + " breakdown"}
+            </CardTitle>
           </Card>
           <Card>
-            <CardTitle>you're running out of</CardTitle>
+            <CardTitle>
+              you're running out of
+            </CardTitle>
           </Card>
+
         </Card>
       </Show>
       <div className="flex flex-col items-center justify-center gap-4">
