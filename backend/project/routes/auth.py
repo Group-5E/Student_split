@@ -50,6 +50,7 @@ def me():
         'id': current_user.id,
         'email': current_user.email,
         'username': current_user.username,
+        'has_household': current_user.memberships is not None,
     } })
 
 
