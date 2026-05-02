@@ -1,7 +1,7 @@
 export default class API {
   static req = async (
     endpoint: string,
-    method: "GET" | "POST" = "GET",
+    method: "GET" | "POST" | "PUT" | "DELETE" = "GET",
     body?: Record<string, unknown>,
   ) => {
     const req = await fetch(`/api/${endpoint}`, {
