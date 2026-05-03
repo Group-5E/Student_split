@@ -5,7 +5,7 @@ from decimal import Decimal
 
 from project.models.base import db
 from project.models.expenses import Expense, ExpenseSplit
-from project.models.households import HouseholdMember
+from project.models.households import HouseholdMember, settle_split
 
 expenses_bp = Blueprint('expenses', __name__)
 
@@ -174,6 +174,26 @@ def update_expense(expense_id):
 
     db.session.commit()
     return jsonify(_serialize(e))
+
+
+@expenses_bp.route('/splits/settle/<int:split_id>', methods=['POST'])
+@login_required
+def settle_expense_split(split_id):
+    split = db.session.get(ExpenseSplit, split_id)
+    if not split:
+        return jsonify({'error': 'Not found'}), 404
+
+    membership = _get_membership(split.expense.household_id)
+    if not membership:
+        return jsonify({'error': 'Not found'}), 404
+    if split.user_id != current_user.id and membership.role != 'admin':
+        return jsonify({'error': 'Forbidden'}), 403
+
+    if split.is_settled:
+        return jsonify({'error': 'Split already settled'}), 400
+
+    result = settle_split(split_id)
+    return jsonify({'success': True, 'settled_at': result.settled_at.isoformat()})
 
 
 @expenses_bp.route('/delete/<int:expense_id>', methods=['DELETE'])

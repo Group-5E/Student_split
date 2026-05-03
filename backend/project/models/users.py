@@ -18,7 +18,7 @@ class User(UserMixin, db.Model):
     password_hash               = Column(String(255), nullable=False)
     name                        = Column(String(100), nullable=False)
     allow_multiple_households   = Column(Boolean, default=False, nullable=False)
-    # is_active                   = Column(Boolean, default=True,  nullable=False)
+    is_active                   = Column(Boolean, default=True,  nullable=False)
     created_at                  = Column(DateTime, server_default=func.now())
     last_active_at              = Column(DateTime, onupdate=func.now())
 
