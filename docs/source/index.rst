@@ -20,7 +20,6 @@ Use the navigation to explore the different sections, including setup instructio
    running
    project_structure
    backend_api
-   contributing
    faq
 
 
