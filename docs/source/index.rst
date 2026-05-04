@@ -7,7 +7,7 @@ Student Split documentation
 ===========================
 
 Welcome to the official documentation for **Student Split**, a full-stack project consisting of a modern, streamlined frontend and a Flask based backend.
-This documentation is aimed at developers and potential contributors who want to understand, and install the project.
+This documentation is aimed at developers who want to understand, and install the project. Note that this project is not currently open for contributions from outside sources.
 
 Use the navigation to explore the different sections, including setup instructions, project structure and backend API details.
 
