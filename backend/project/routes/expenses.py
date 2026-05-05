@@ -1,3 +1,6 @@
+# --[ expenses.py ] !!! >
+# --[ CRUD endpoints for expenses and expense splits
+
 from flask import Blueprint, request, jsonify
 from flask_login import login_required, current_user
 from datetime import datetime
@@ -10,6 +13,7 @@ from project.models.households import HouseholdMember, settle_split
 expenses_bp = Blueprint('expenses', __name__)
 
 
+# --[ Returns the current user's active membership for a given household, or None
 def _get_membership(household_id):
     return HouseholdMember.query.filter_by(
         user_id=current_user.id,
@@ -46,6 +50,8 @@ def _serialize(e):
     }
 
 
+# --[ Resolves split amounts into (user_id, amount_owed) pairs
+# --[ Rounding remainder goes to the last person to avoid penny discrepancies
 def _compute_splits(amount, split_type, splits_data):
     total = Decimal(str(amount))
 
@@ -131,7 +137,7 @@ def create_expense():
         expense_date=expense_date,
     )
     db.session.add(expense)
-    db.session.flush()
+    db.session.flush()  # get expense id before committing
 
     for user_id, amount_owed in _compute_splits(body['amount'], split_type, splits_data):
         db.session.add(ExpenseSplit(expense_id=expense.id, user_id=user_id, amount_owed=amount_owed))
@@ -143,6 +149,7 @@ def create_expense():
 @expenses_bp.route('/update/<int:expense_id>', methods=['PUT'])
 @login_required
 def update_expense(expense_id):
+    # --[ only the payer or an admin can edit an expense
     e = db.get_or_404(Expense, expense_id)
     if e.is_deleted:
         return jsonify({'error': 'Not found'}), 404
@@ -164,6 +171,7 @@ def update_expense(expense_id):
             return jsonify({'error': 'Invalid expense_date format, use ISO 8601'}), 400
 
     if 'splits' in body:
+        # --[ drop and recreate splits if new split data is provided
         split_type = body.get('split_type', e.split_type)
         e.split_type = split_type
         for s in list(e.splits):
@@ -179,6 +187,7 @@ def update_expense(expense_id):
 @expenses_bp.route('/splits/settle/<int:split_id>', methods=['POST'])
 @login_required
 def settle_expense_split(split_id):
+    # --[ only the user who owes the split, or an admin, can settle it
     split = db.session.get(ExpenseSplit, split_id)
     if not split:
         return jsonify({'error': 'Not found'}), 404
@@ -199,6 +208,7 @@ def settle_expense_split(split_id):
 @expenses_bp.route('/delete/<int:expense_id>', methods=['DELETE'])
 @login_required
 def delete_expense(expense_id):
+    # --[ soft delete — keeps the record for debt tracking
     e = db.get_or_404(Expense, expense_id)
     if e.is_deleted:
         return jsonify({'error': 'Not found'}), 404

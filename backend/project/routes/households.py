@@ -1,3 +1,6 @@
+# --[ households.py ] !!! >
+# --[ CRUD endpoints for households and household members
+
 from flask import Blueprint, request, jsonify
 from flask_login import login_required, current_user
 from datetime import datetime
@@ -9,6 +12,7 @@ from project.models.users import User
 households_bp = Blueprint('households', __name__)
 
 
+# --[ Returns the current user's active membership for a given household, or None
 def _get_membership(household_id):
     return HouseholdMember.query.filter_by(
         user_id=current_user.id,
@@ -50,7 +54,7 @@ def create_household():
         created_by=current_user.id,
     )
     db.session.add(household)
-    db.session.flush()
+    db.session.flush()  # get household id before committing
 
     membership = HouseholdMember(
         user_id=current_user.id,
@@ -102,6 +106,7 @@ def get_household(household_id):
 @households_bp.route('/update/<int:household_id>', methods=['PUT'])
 @login_required
 def update_household(household_id):
+    # --[ admin only
     membership = _get_membership(household_id)
     if not membership or membership.role != 'admin':
         return jsonify({'error': 'Forbidden'}), 403
@@ -123,6 +128,7 @@ def update_household(household_id):
 @households_bp.route('/delete/<int:household_id>', methods=['DELETE'])
 @login_required
 def delete_household(household_id):
+    # --[ soft delete — sets is_active=False, admin only
     membership = _get_membership(household_id)
     if not membership or membership.role != 'admin':
         return jsonify({'error': 'Forbidden'}), 403
@@ -154,6 +160,7 @@ def list_members(household_id):
 @households_bp.route('/<int:household_id>/members/add', methods=['POST'])
 @login_required
 def add_member(household_id):
+    # --[ admin only — accepts user_id, username, or email to find the user
     membership = _get_membership(household_id)
     if not membership or membership.role != 'admin':
         return jsonify({'error': 'Forbidden'}), 403
@@ -174,6 +181,7 @@ def add_member(household_id):
     if existing:
         if existing.is_active:
             return jsonify({'error': 'User is already a member'}), 409
+        # --[ re-activate if they previously left
         existing.is_active = True
         existing.left_at = None
         db.session.commit()
@@ -192,6 +200,7 @@ def add_member(household_id):
 @households_bp.route('/<int:household_id>/members/remove/<int:user_id>', methods=['DELETE'])
 @login_required
 def remove_member(household_id, user_id):
+    # --[ admin can remove anyone, members can only remove themselves
     membership = _get_membership(household_id)
     if not membership:
         return jsonify({'error': 'Not found'}), 404

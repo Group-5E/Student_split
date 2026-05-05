@@ -1,3 +1,6 @@
+# --[ payments.py ] !!! >
+# --[ CRUD endpoints for payments between household members
+
 from flask import Blueprint, request, jsonify
 from flask_login import login_required, current_user
 from datetime import datetime
@@ -10,6 +13,7 @@ from project.models.households import HouseholdMember
 payments_bp = Blueprint('payments', __name__)
 
 
+# --[ Returns the current user's active membership for a given household, or None
 def _get_membership(household_id):
     return HouseholdMember.query.filter_by(
         user_id=current_user.id,
@@ -84,7 +88,7 @@ def create_payment():
     )
     db.session.add(payment)
 
-    # mark unsettled splits where current_user owes the payee within this household
+    # --[ auto-settle any splits the payer owes the payee in this household
     unsettled_splits = (
         ExpenseSplit.query
         .join(ExpenseSplit.expense)
@@ -109,6 +113,7 @@ def create_payment():
 @payments_bp.route('/delete/<int:payment_id>', methods=['DELETE'])
 @login_required
 def delete_payment(payment_id):
+    # --[ only the payer or an admin can delete a payment
     p = db.get_or_404(Payment, payment_id)
     membership = _get_membership(p.household_id)
     if not membership:
