@@ -13,8 +13,6 @@ The backend uses **Flask-Login** for session-based authentication.
 - Clients retain this cookie to remain authenticated.
 - Protected endpoints return ``401`` if the cookie is missing or invalid.
 
----
-
 Authentication Endpoints
 ------------------------
 
@@ -124,8 +122,6 @@ Deactivates the current user's account (soft delete). Requires authentication.
 .. code-block:: json
 
    { "success": true }
-
----
 
 Household Endpoints
 -------------------
@@ -249,8 +245,6 @@ DELETE /api/households/<id>/members/remove/<user_id>
 
 Removes a member from the household. Admins can remove anyone; members can only remove themselves.
 
----
-
 Expense Endpoints
 -----------------
 
@@ -325,8 +319,6 @@ Marks an individual split as settled. Only the user who owes the split, or an ad
 
    { "success": true, "settled_at": "2026-05-01T15:00:00" }
 
----
-
 Payment Endpoints
 -----------------
 
@@ -368,8 +360,6 @@ DELETE /api/payments/delete/<id>
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Deletes a payment record. Only the payer or an admin can delete.
-
----
 
 Known Limitations
 -----------------
