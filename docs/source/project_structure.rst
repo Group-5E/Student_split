@@ -71,7 +71,7 @@ Filler.
 
 How This Supplements the Architecture
 -------------------------------------
-It doesn't...
+It doesn't.
 
 Next Steps
 ----------
