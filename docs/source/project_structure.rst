@@ -66,7 +66,8 @@ Frontend Structure
 The frontend is at the front of the backend...
 
 Root Files
-----------
+---------
+
 
 How This Supplements the Architecture
 -------------------------------------
