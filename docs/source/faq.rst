@@ -6,44 +6,44 @@ This page answers common questions about **Student Split**, covering the backend
 General Questions
 -----------------
 
-What is Student Split
-~~~~~~~~~~~~~~~~~~~~~
+What is Student Split?
+~~~~~~~~~~~~~~~~~~~~~~
 
 Student Split is a full-stack application designed to help students manage shared expenses, track household bill payments, and organise household finances.
 It consists of a Flask backend, a ReactJS frontend, and Sphinx-based documentation.
 
-Who is this project for
-~~~~~~~~~~~~~~~~~~~~~~~
+Who is this project for?
+~~~~~~~~~~~~~~~~~~~~~~~~
 
 Whilst this project is still undergoing development, it is mostly intended for potential developers and anyone interested in learning how a modern full-stack application is structured.
 
 Backend Questions
 -----------------
 
-Why Flask instead of anything else
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Why Flask instead of anything else?
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Flask provides a lightweight, flexible foundation that fits the project's size.
 It allows contributors to understand the backend without navigating a large framework.
 
-How does the authentication work
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+How does the authentication work?
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Authentication uses **Flask Login** with session cookies.
 
 - When a user logs in or registers, a session cookie is created.
 - The cookie must be preserved by the client, else they won't be authenticated.
 
-Where is the database stored
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Where is the database stored?
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 The database is stored in ``instance/app.db``
 
 Frontend Questions
 ------------------
 
-Why Vite instead of something else
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Why Vite instead of something else?
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Vite provides:
 
@@ -51,8 +51,8 @@ Vite provides:
 - Better TypeScript support
 - Modern tooling with minimal configuration
 
-Where do I add new pages or components
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Where do I add new pages or components?
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Frontend structure:
 
