@@ -59,15 +59,15 @@ Below is the high-level structure of the project::
 
 Backend Structure
 -----------------
-The backend is at the back of the frontend...
+Filler.
 
 Frontend Structure
 ------------------
-The frontend is at the front of the backend...
+Filler.
 
 Root Files
 ---------
-
+Filler.
 
 How This Supplements the Architecture
 -------------------------------------
