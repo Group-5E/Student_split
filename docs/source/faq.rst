@@ -37,7 +37,7 @@ Authentication uses **Flask Login** with session cookies.
 Where is the database stored
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Details coming soon.
+The database is stored in ``instance/app.db``
 
 Frontend Questions
 ------------------
