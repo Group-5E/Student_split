@@ -4,9 +4,44 @@ import { Button } from "@/components/ui/button";
 import { Show } from '@/components/auth';
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { MoonStar } from "lucide-react";
+import { ChartContainer, ChartTooltip, ChartTooltipContent, type ChartConfig } from "@/components/ui/chart";
+import { LabelList, Pie, PieChart } from "recharts";
+
+const chartData = [
+  { browser: "chrome", visitors: 275, fill: "var(--color-chrome)" },
+  { browser: "safari", visitors: 200, fill: "var(--color-safari)" },
+  { browser: "firefox", visitors: 187, fill: "var(--color-firefox)" },
+  { browser: "edge", visitors: 173, fill: "var(--color-edge)" },
+  { browser: "other", visitors: 90, fill: "var(--color-other)" },
+]
+const chartConfig = {
+  visitors: {
+    label: "Visitors",
+  },
+  chrome: {
+    label: "Chrome",
+    color: "var(--chart-1)",
+  },
+  safari: {
+    label: "Safari",
+    color: "var(--chart-2)",
+  },
+  firefox: {
+    label: "Firefox",
+    color: "var(--chart-3)",
+  },
+  edge: {
+    label: "Edge",
+    color: "var(--chart-4)",
+  },
+  other: {
+    label: "Other",
+    color: "var(--chart-5)",
+  },
+} satisfies ChartConfig
 
 function Index() {
-  const { user, isAuthenticated, hasHousehold} = useUser();
+  const { user, isAuthenticated, hasHousehold } = useUser();
   const date = new Date();
   const month = date.toLocaleString('default', { month: 'long' })
 
@@ -34,25 +69,25 @@ function Index() {
           <Show when="homeless">
             <QuestionCard title="Next Payment">
               <p>nothing to show...</p>
-              <MoonStar className="size-1/3"/>  
+              <MoonStar className="size-1/4" />
             </ QuestionCard>
             <QuestionCard title={`${month} breakdown`}>
               <p>nothing to show...</p>
-              <MoonStar className="size-1/3"/> 
+              <MoonStar className="size-1/4" />
             </ QuestionCard >
             <QuestionCard title="you're running out of...">
               <p>nothing to show...</p>
-              <MoonStar className="size-1/3"/> 
+              <MoonStar className="size-1/4" />
             </ QuestionCard>
           </Show>
         </Card>
       </Show>
       <div className="flex flex-col items-center justify-center gap-4">
-      <Card className="flex p-3">
-        <p className="text-center text-2xl dark:text-white">
-          {user && <span>Logged in as {user?.username}</span>}
-        </p>
-      </Card> 
+        <Card className="flex p-3">
+          <p className="text-center text-2xl dark:text-white">
+            {user && <span>Logged in as {user?.username}</span>}
+          </p>
+        </Card>
       </div>
     </div>
   );
