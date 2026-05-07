@@ -12,7 +12,7 @@ function RouteComponent() {
       mode="single"
       selected={date}
       onSelect={setDate}
-      className="rounded-lg border [--cell-size:--spacing(5)] md:[--cell-size:--spacing(5)] w-full"
+      className="rounded-lg border [--cell-size:--spacing(5)] md:[--cell-size:--spacing(5)] w-full h-full"
       captionLayout="dropdown"
     />
   )
