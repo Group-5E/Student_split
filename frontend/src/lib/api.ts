@@ -1,7 +1,7 @@
 import type { User } from "@/lib/types";
 
 export default class API {
-  static req = async <T = unknown>(
+  static req = async <T = any>(
     endpoint: string,
     method: "GET" | "POST" | "PUT" | "DELETE" = "GET",
     body?: Record<string, unknown>,
