@@ -14,6 +14,6 @@ export function useUser() {
     user: data?.user ?? null,
     isLoading,
     isAuthenticated: !!data?.user,
-    hasHousehold: data?.has_household ?? false,
+    hasHousehold: data?.user?.has_household ?? false,
   };
 }

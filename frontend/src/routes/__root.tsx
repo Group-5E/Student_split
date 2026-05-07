@@ -7,6 +7,7 @@ import {
   SidebarProvider,
   SidebarTrigger,
 } from "@/components/ui/sidebar";
+import { Toaster } from "@/components/ui/sonner";
 import { Spinner } from "@/components/ui/spinner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { meQueryOptions } from "@/hooks/useUser";
@@ -37,6 +38,7 @@ const RootLayout = () => (
         </TooltipProvider>
       </SidebarProvider>
     </ThemeProvider>
+    <Toaster />
     <TanStackRouterDevtools position={"bottom-right"} />
   </>
 );

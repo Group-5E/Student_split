@@ -51,7 +51,8 @@ def me():
         'email': current_user.email,
         'username': current_user.username,
         'name': current_user.name,
-        'has_household': current_user.memberships is not None,
+        'has_household': True if current_user.memberships else False,
+        'household_id': current_user.memberships[0].household_id if current_user.memberships else None,
     } })
 
 

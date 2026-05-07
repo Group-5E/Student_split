@@ -1,10 +1,12 @@
+import type { User } from "@/lib/types";
+
 export default class API {
-  static req = async (
+  static req = async <T = unknown>(
     endpoint: string,
     method: "GET" | "POST" | "PUT" | "DELETE" = "GET",
     body?: Record<string, unknown>,
-  ) => {
-    const req = await fetch(`/api/${endpoint}`, {
+  ): Promise<T> => {
+    const response = await fetch(`/api/${endpoint}`, {
       method,
       credentials: "include",
       headers: {
@@ -13,17 +15,19 @@ export default class API {
       body: body ? JSON.stringify(body) : undefined,
     });
 
-    if (!req.ok) {
-      const result = await req.json();
-      throw new Error(result.error);
-    } else {
-      const result = await req.json();
-      return result;
+    const result: unknown = await response.json();
+
+    if (!response.ok) {
+      const error =
+        (result as { error?: string }).error || "An unknown error occurred";
+      throw new Error(error);
     }
+
+    return result as T;
   };
 
   static auth = {
-    me: () => API.req("auth/me"),
+    me: () => API.req<{ user: User }>("auth/me"),
     register: (
       username: string,
       name: string,
