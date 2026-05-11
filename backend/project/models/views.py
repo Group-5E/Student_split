@@ -42,6 +42,16 @@ def get_user_debts(user_id: int, household_id: int):
     )
     return result.mappings().all()
 
+# --[ GET USER CREDITS !!! >
+# --[ This function returns all amounts owed to a user within a specific household
+def get_user_credits(user_id: int, household_id: int):
+    result = db.session.execute(
+        text("SELECT * FROM v_debt_summary WHERE creditor_id = :user_id "
+             "AND household_id = :household_id"),
+        {"user_id": user_id, "household_id": household_id}
+    )
+    return result.mappings().all()
+
 DEBT_SUMMARY_VIEW = """
 CREATE VIEW IF NOT EXISTS v_debt_summary AS
 SELECT
