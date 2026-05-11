@@ -52,6 +52,15 @@ def get_user_credits(user_id: int, household_id: int):
     )
     return result.mappings().all()
 
+# --[ GET USER ACTIVITY !!! >
+# --[ This function returns the activity stats for a user
+def get_user_activity(user_id: int):
+    result = db.session.execute(
+        text("SELECT * FROM v_user_activity WHERE user_id = :user_id"),
+        {"user_id": user_id}
+    )
+    return result.mappings().one_or_none()
+
 DEBT_SUMMARY_VIEW = """
 CREATE VIEW IF NOT EXISTS v_debt_summary AS
 SELECT
