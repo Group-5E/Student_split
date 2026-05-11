@@ -13,6 +13,7 @@ import { Route as StatisticsRouteImport } from './routes/statistics'
 import { Route as SignupRouteImport } from './routes/signup'
 import { Route as LoginRouteImport } from './routes/login'
 import { Route as CalenderRouteImport } from './routes/calender'
+import { Route as AdminRouteImport } from './routes/admin'
 import { Route as AccountRouteImport } from './routes/account'
 import { Route as IndexRouteImport } from './routes/index'
 
@@ -36,6 +37,11 @@ const CalenderRoute = CalenderRouteImport.update({
   path: '/calender',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AdminRoute = AdminRouteImport.update({
+  id: '/admin',
+  path: '/admin',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const AccountRoute = AccountRouteImport.update({
   id: '/account',
   path: '/account',
@@ -50,6 +56,7 @@ const IndexRoute = IndexRouteImport.update({
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/account': typeof AccountRoute
+  '/admin': typeof AdminRoute
   '/calender': typeof CalenderRoute
   '/login': typeof LoginRoute
   '/signup': typeof SignupRoute
@@ -58,6 +65,7 @@ export interface FileRoutesByFullPath {
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/account': typeof AccountRoute
+  '/admin': typeof AdminRoute
   '/calender': typeof CalenderRoute
   '/login': typeof LoginRoute
   '/signup': typeof SignupRoute
@@ -67,6 +75,7 @@ export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/account': typeof AccountRoute
+  '/admin': typeof AdminRoute
   '/calender': typeof CalenderRoute
   '/login': typeof LoginRoute
   '/signup': typeof SignupRoute
@@ -77,16 +86,25 @@ export interface FileRouteTypes {
   fullPaths:
     | '/'
     | '/account'
+    | '/admin'
     | '/calender'
     | '/login'
     | '/signup'
     | '/statistics'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/account' | '/calender' | '/login' | '/signup' | '/statistics'
+  to:
+    | '/'
+    | '/account'
+    | '/admin'
+    | '/calender'
+    | '/login'
+    | '/signup'
+    | '/statistics'
   id:
     | '__root__'
     | '/'
     | '/account'
+    | '/admin'
     | '/calender'
     | '/login'
     | '/signup'
@@ -96,6 +114,7 @@ export interface FileRouteTypes {
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AccountRoute: typeof AccountRoute
+  AdminRoute: typeof AdminRoute
   CalenderRoute: typeof CalenderRoute
   LoginRoute: typeof LoginRoute
   SignupRoute: typeof SignupRoute
@@ -132,6 +151,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof CalenderRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/admin': {
+      id: '/admin'
+      path: '/admin'
+      fullPath: '/admin'
+      preLoaderRoute: typeof AdminRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/account': {
       id: '/account'
       path: '/account'
@@ -152,6 +178,7 @@ declare module '@tanstack/react-router' {
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AccountRoute: AccountRoute,
+  AdminRoute: AdminRoute,
   CalenderRoute: CalenderRoute,
   LoginRoute: LoginRoute,
   SignupRoute: SignupRoute,

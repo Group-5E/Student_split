@@ -32,10 +32,12 @@ The project follows a lightweight, developer-friendly **n-tier architecture**. T
     This seperation allows each part of the system to be developed and deployed independently.
 
 High-Level Structure
---------------------
+-------------------
 
 The repository is organised into two main components:
+
 - ``frontend/`` - Contains the client-side application and dependencies.
+
 - ``backend/`` - Contains the Flask application, routes, models and environment setup.
 
 A more detailed breakdown of the folder layout cna be found in the :doc:`project_structure` section.

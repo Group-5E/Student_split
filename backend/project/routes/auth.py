@@ -1,6 +1,6 @@
 from project.models.base import db
 from werkzeug.security import generate_password_hash, check_password_hash
-from project.models.users import User
+from project.models.users import User, update_user, delete_user
 from flask import Blueprint, request, jsonify
 from flask_login import login_user, login_required, logout_user, current_user
 
@@ -50,8 +50,36 @@ def me():
         'id': current_user.id,
         'email': current_user.email,
         'username': current_user.username,
-        'has_household': current_user.memberships is not None,
+        'name': current_user.name,
+        'has_household': True if current_user.memberships else False,
+        'household_id': current_user.memberships[0].household_id if current_user.memberships else None,
     } })
+
+
+@auth_bp.route('/update', methods=['PUT'])
+@login_required
+def update():
+    body = request.get_json() or {}
+    allowed = ('username', 'name', 'email', 'allow_multiple_households')
+    kwargs = {k: v for k, v in body.items() if k in allowed}
+    if not kwargs:
+        return jsonify({'error': 'No valid fields provided'}), 400
+    user = update_user(current_user.id, **kwargs)
+    return jsonify({
+        'id': user.id,
+        'username': user.username,
+        'name': user.name,
+        'email': user.email,
+        'allow_multiple_households': user.allow_multiple_households,
+    })
+
+
+@auth_bp.route('/delete', methods=['DELETE'])
+@login_required
+def delete():
+    logout_user()
+    delete_user(current_user.id)
+    return jsonify({'success': True})
 
 
 # @auth_bp.route('/github')

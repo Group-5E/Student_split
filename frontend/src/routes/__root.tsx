@@ -7,6 +7,7 @@ import {
   SidebarProvider,
   SidebarTrigger,
 } from "@/components/ui/sidebar";
+import { Toaster } from "@/components/ui/sonner";
 import { Spinner } from "@/components/ui/spinner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { meQueryOptions } from "@/hooks/useUser";
@@ -27,6 +28,7 @@ const RootLayout = () => (
               <Show when="signed-in">
                 <SidebarTrigger className="-ml-1" />
               </Show>
+              <p className="">Student Split</p>
               <div className="ml-auto">
                 <ModeToggle />
               </div>
@@ -36,6 +38,7 @@ const RootLayout = () => (
         </TooltipProvider>
       </SidebarProvider>
     </ThemeProvider>
+    <Toaster />
     <TanStackRouterDevtools position={"bottom-right"} />
   </>
 );

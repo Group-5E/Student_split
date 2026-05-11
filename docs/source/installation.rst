@@ -11,7 +11,7 @@ Install the following:
 
 - **Python 3.12+**
 - **pip**
-- **Node.js 18+**
+- **Node.js 22+**
 - **pnpm**
 - **Git**
 

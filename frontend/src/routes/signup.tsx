@@ -9,6 +9,7 @@ import {
 import {
   Field,
   FieldDescription,
+  FieldError,
   FieldGroup,
   FieldLabel,
 } from "@/components/ui/field";
@@ -30,7 +31,8 @@ export default function SignupPage() {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  // const [confirmPassword, setConfirmPassword] = useState("");
+  const [isEmailInvalid,setEmailInvalid] = useState(false);
+  
 
   const signupMutation = useMutation({
     mutationFn: ({
@@ -47,6 +49,11 @@ export default function SignupPage() {
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["me"] });
       navigate({ to: "/" });
+    },
+    onError(error) {
+      if (error.message === 'Email already in use'){
+        setEmailInvalid(true);
+      }
     },
   });
 
@@ -89,17 +96,21 @@ export default function SignupPage() {
                     required
                   />
                 </Field>
-                <Field>
+                <Field data-invalid={isEmailInvalid}>
                   <FieldLabel htmlFor="email">Email</FieldLabel>
                   <Input
+                    aria-invalid={isEmailInvalid}
                     id="email"
                     type="email"
-                    onChange={(e) => setEmail(e.target.value)}
+                    onChange={(e) => setEmail(e.target.value.toLowerCase())}
                     value={email}
                     placeholder="m@example.com"
                     autoComplete="off"
                     required
                   />
+                  {isEmailInvalid && (
+                      <FieldError>Email already in use! </FieldError>
+                    )}
                 </Field>
                 <Field>
                   <FieldLabel htmlFor="password">Password</FieldLabel>
@@ -161,7 +172,6 @@ export default function SignupPage() {
                   </Field>
                 </FieldGroup>
               </FieldGroup>
-              {/*here we would call a DBS check!!!*/}
             </form>
           </CardContent>
         </Card>
