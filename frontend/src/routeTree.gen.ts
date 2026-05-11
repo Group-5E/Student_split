@@ -11,6 +11,7 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as StatisticsRouteImport } from './routes/statistics'
 import { Route as SignupRouteImport } from './routes/signup'
+import { Route as Pay_splitRouteImport } from './routes/pay_split'
 import { Route as LoginRouteImport } from './routes/login'
 import { Route as CalenderRouteImport } from './routes/calender'
 import { Route as AdminRouteImport } from './routes/admin'
@@ -25,6 +26,11 @@ const StatisticsRoute = StatisticsRouteImport.update({
 const SignupRoute = SignupRouteImport.update({
   id: '/signup',
   path: '/signup',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const Pay_splitRoute = Pay_splitRouteImport.update({
+  id: '/pay_split',
+  path: '/pay_split',
   getParentRoute: () => rootRouteImport,
 } as any)
 const LoginRoute = LoginRouteImport.update({
@@ -59,6 +65,7 @@ export interface FileRoutesByFullPath {
   '/admin': typeof AdminRoute
   '/calender': typeof CalenderRoute
   '/login': typeof LoginRoute
+  '/pay_split': typeof Pay_splitRoute
   '/signup': typeof SignupRoute
   '/statistics': typeof StatisticsRoute
 }
@@ -68,6 +75,7 @@ export interface FileRoutesByTo {
   '/admin': typeof AdminRoute
   '/calender': typeof CalenderRoute
   '/login': typeof LoginRoute
+  '/pay_split': typeof Pay_splitRoute
   '/signup': typeof SignupRoute
   '/statistics': typeof StatisticsRoute
 }
@@ -78,6 +86,7 @@ export interface FileRoutesById {
   '/admin': typeof AdminRoute
   '/calender': typeof CalenderRoute
   '/login': typeof LoginRoute
+  '/pay_split': typeof Pay_splitRoute
   '/signup': typeof SignupRoute
   '/statistics': typeof StatisticsRoute
 }
@@ -89,6 +98,7 @@ export interface FileRouteTypes {
     | '/admin'
     | '/calender'
     | '/login'
+    | '/pay_split'
     | '/signup'
     | '/statistics'
   fileRoutesByTo: FileRoutesByTo
@@ -98,6 +108,7 @@ export interface FileRouteTypes {
     | '/admin'
     | '/calender'
     | '/login'
+    | '/pay_split'
     | '/signup'
     | '/statistics'
   id:
@@ -107,6 +118,7 @@ export interface FileRouteTypes {
     | '/admin'
     | '/calender'
     | '/login'
+    | '/pay_split'
     | '/signup'
     | '/statistics'
   fileRoutesById: FileRoutesById
@@ -117,6 +129,7 @@ export interface RootRouteChildren {
   AdminRoute: typeof AdminRoute
   CalenderRoute: typeof CalenderRoute
   LoginRoute: typeof LoginRoute
+  Pay_splitRoute: typeof Pay_splitRoute
   SignupRoute: typeof SignupRoute
   StatisticsRoute: typeof StatisticsRoute
 }
@@ -135,6 +148,13 @@ declare module '@tanstack/react-router' {
       path: '/signup'
       fullPath: '/signup'
       preLoaderRoute: typeof SignupRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/pay_split': {
+      id: '/pay_split'
+      path: '/pay_split'
+      fullPath: '/pay_split'
+      preLoaderRoute: typeof Pay_splitRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/login': {
@@ -181,6 +201,7 @@ const rootRouteChildren: RootRouteChildren = {
   AdminRoute: AdminRoute,
   CalenderRoute: CalenderRoute,
   LoginRoute: LoginRoute,
+  Pay_splitRoute: Pay_splitRoute,
   SignupRoute: SignupRoute,
   StatisticsRoute: StatisticsRoute,
 }

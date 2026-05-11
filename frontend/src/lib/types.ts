@@ -5,6 +5,7 @@ export interface User {
   name: string;
   has_household: boolean;
   household_id: number | null;
+  avatar: undefined;
 }
 
 export interface HouseholdMember {
