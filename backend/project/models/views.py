@@ -5,6 +5,26 @@
 # --[ How much each student owes each other within a household
 # --[ Excludes the payer's own split row (user_id != paid_by_id)
 from sqlalchemy import text
+from . import db
+
+
+
+# --/ !!! >
+# --[ HOUSEHOLD VIEWS
+# --[ ------------------------------------ >
+
+# --[ GET USER HOUSEHOLDS !!! >
+# --[ This function returns all households a user belongs to with their stats
+def get_user_households(user_id: int):
+    result = db.session.execute(
+        text("SELECT * FROM v_household_stats WHERE household_id IN "
+             "(SELECT household_id FROM household_members WHERE user_id = :user_id AND is_active = 1)"),
+        {"user_id": user_id}
+    )
+    return result.mappings().all()
+
+
+
 DEBT_SUMMARY_VIEW = """
 CREATE VIEW IF NOT EXISTS v_debt_summary AS
 SELECT
