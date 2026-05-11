@@ -23,7 +23,14 @@ def get_user_households(user_id: int):
     )
     return result.mappings().all()
 
-
+# --[ GET USER BALANCE !!! >
+# --[ This function returns the net balance for a user across all their households
+def get_user_balance(user_id: int):
+    result = db.session.execute(
+        text("SELECT * FROM v_user_balance WHERE user_id = :user_id"),
+        {"user_id": user_id}
+    )
+    return result.mappings().all()
 
 DEBT_SUMMARY_VIEW = """
 CREATE VIEW IF NOT EXISTS v_debt_summary AS
