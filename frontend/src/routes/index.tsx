@@ -123,7 +123,7 @@ function Index() {
           <CreateHouseholdDialog />
         </Show>
         <Show when="housed">
-          <Card className="flex w-full h-full flex-row gap-5 px-5 py-5 items-center justify-around">
+          <Card className="grid lg:grid-cols-3 md:grid-cols-2 sm:grid-cols-1 w-full h-full gap-5 px-5 py-5 items-center justify-around">
             <QuestionCard title="Next Payment">
               {expenses ? (
                 <>
@@ -232,7 +232,7 @@ function MonthBreakdown({ expenses }: { expenses: ExpenseResponse[] }) {
                     : "Pending"}
                 </TableCell>
                 <TableCell>{expense.category}</TableCell>
-                <TableCell>{expense.amount}</TableCell>
+                <TableCell>£{expense.amount}</TableCell>
               </TableRow>
             ))}
         </TableBody>
