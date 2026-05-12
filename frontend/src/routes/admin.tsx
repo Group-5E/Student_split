@@ -36,8 +36,8 @@ import { Separator } from "@/components/ui/separator";
 import { useUser } from "@/hooks/useUser";
 import API from "@/lib/api";
 import {
-  ExpenseResponse,
   type Expense,
+  type ExpenseResponse,
   type Household,
   type HouseholdMember,
   type Split,
@@ -45,7 +45,7 @@ import {
 } from "@/lib/types";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { createFileRoute } from "@tanstack/react-router";
-import { useState } from "react";
+import { Fragment, useState } from "react";
 import { toast } from "sonner";
 
 export const Route = createFileRoute("/admin")({
@@ -202,7 +202,7 @@ function HouseholdCard() {
               {householdsQuery.data && (
                 <div className="flex w-full flex-col gap-2 text-sm pr-4">
                   {householdsQuery.data.map((household) => (
-                    <>
+                    <Fragment key={household.id}>
                       <dl className="flex items-center justify-between">
                         <dt key={household.id}>{household.name}</dt>
                         <dd>
@@ -210,7 +210,7 @@ function HouseholdCard() {
                         </dd>
                       </dl>
                       <Separator />
-                    </>
+                    </Fragment>
                   ))}
                 </div>
               )}
@@ -235,6 +235,7 @@ function ExpenseCard() {
         `expenses/list?household_id=${user?.household_id}`,
         "GET",
       ),
+    enabled: !!user?.household_id,
   });
 
   const createExpenseMutation = useMutation({
@@ -308,15 +309,15 @@ function ExpenseCard() {
               {expensesQuery.data && (
                 <div className="flex w-full flex-col gap-2 text-sm pr-4">
                   {expensesQuery.data.map((expense) => (
-                    <>
-                      <Item>
+                    <Fragment key={expense.id}>
+                      <Item key={expense.id}>
                         <ItemContent>
                           <ItemTitle>{expense.description}</ItemTitle>
                           <ItemDescription>{expense.amount}</ItemDescription>
                         </ItemContent>
                       </Item>
                       <Separator />
-                    </>
+                    </Fragment>
                   ))}
                 </div>
               )}
@@ -348,7 +349,9 @@ function ExpenseDialog({
   });
 
   const handleSubmit = () => {
+    const lastSplitId = splits.length > 0 ? splits[splits.length - 1].id : 0;
     const split: Split = {
+      id: lastSplitId + 1,
       amount,
       split_type: splitType,
       name: comboValue?.name ?? "",
@@ -363,16 +366,22 @@ function ExpenseDialog({
       <Field>
         <FieldLabel>Expense Splits</FieldLabel>
         <Card>
-          <CardContent className="flex flex-col gap-2">
-            {splits.map((split) => (
-              <Item variant={"outline"} key={split.user_id}>
-                <ItemContent>
-                  <ItemTitle>{split.name}</ItemTitle>
-                  <ItemDescription>{`${split.split_type} - ${split.amount}`}</ItemDescription>
-                </ItemContent>
-              </Item>
-            ))}
-          </CardContent>
+          {splits.length > 0 ? (
+            <CardContent className="flex flex-col gap-2">
+              {splits.map((split) => (
+                <Item variant={"outline"} key={split.id}>
+                  <ItemContent>
+                    <ItemTitle>{split.name}</ItemTitle>
+                    <ItemDescription>{`${split.split_type} - ${split.amount}`}</ItemDescription>
+                  </ItemContent>
+                </Item>
+              ))}
+            </CardContent>
+          ) : (
+            <CardContent>
+              <p>No splits created</p>
+            </CardContent>
+          )}
         </Card>
       </Field>
       <Dialog>
@@ -390,7 +399,7 @@ function ExpenseDialog({
                 value={comboValue}
                 onValueChange={setComboValue}
                 items={householdMembers.data}
-                itemToStringLabel={(member) => member.name}
+                itemToStringLabel={(member) => member!.name}
               >
                 <ComboboxInput placeholder="Select a member" />
                 <ComboboxContent className="pointer-events-auto">

@@ -28,7 +28,6 @@ const RootLayout = () => (
               <Show when="signed-in">
                 <SidebarTrigger className="-ml-1" />
               </Show>
-              <p className="">Student Split</p>
               <div className="ml-auto">
                 <ModeToggle />
               </div>
@@ -39,7 +38,7 @@ const RootLayout = () => (
       </SidebarProvider>
     </ThemeProvider>
     <Toaster />
-    <TanStackRouterDevtools position={"bottom-right"} />
+    {/*<TanStackRouterDevtools position={"bottom-right"} />*/}
   </>
 );
 

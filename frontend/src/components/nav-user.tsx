@@ -17,6 +17,7 @@ import {
   useSidebar,
 } from "@/components/ui/sidebar";
 import API from "@/lib/api";
+import type { User } from "@/lib/types";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { Link } from "@tanstack/react-router";
 import {
@@ -27,16 +28,7 @@ import {
   UserRound,
 } from "lucide-react";
 
-export function NavUser({
-  user,
-}: {
-  user?: {
-    name: string;
-    username: string;
-    email: string;
-    avatar: string;
-  };
-}) {
+export function NavUser({ user }: { user?: User }) {
   const { isMobile } = useSidebar();
   const queryClient = useQueryClient();
 

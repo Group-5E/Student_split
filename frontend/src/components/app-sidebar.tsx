@@ -25,7 +25,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
             <Building2 />
           </div>
           <div className="grid flex-1 text-left text-sm leading-tight">
-            <span className="truncate font-medium">{"Test"}</span>
+            <span className="truncate font-medium">Student Split</span>
           </div>
         </SidebarMenuButton>
       </SidebarHeader>
@@ -33,7 +33,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
         <NavMain />
       </SidebarContent>
       <SidebarFooter>
-        <NavUser user={user} />
+        <NavUser user={user!} />
       </SidebarFooter>
       <SidebarRail />
     </Sidebar>

@@ -28,6 +28,7 @@ export interface Household {
 export type SplitType = "equal" | "percentage" | "fixed";
 
 export interface Split {
+  id: number;
   user_id: number;
   name: string;
   split_type: SplitType;
@@ -37,6 +38,7 @@ export interface Split {
 export interface Expense {
   household_id: number;
   description: string;
+  category?: string;
   amount: number;
   expense_date: Date;
   splits: Split[];

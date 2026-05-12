@@ -11,7 +11,7 @@ export const meQueryOptions = queryOptions({
 export function useUser() {
   const { data, isLoading } = useQuery(meQueryOptions);
   return {
-    user: data?.user ?? null,
+    user: data?.user ?? undefined,
     isLoading,
     isAuthenticated: !!data?.user,
     hasHousehold: data?.user?.has_household ?? false,

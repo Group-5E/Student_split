@@ -14,9 +14,15 @@ import {
   FieldLabel,
 } from "@/components/ui/field";
 import { Input } from "@/components/ui/input";
+import { useUser } from "@/hooks/useUser";
 import API from "@/lib/api";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
+import {
+  createFileRoute,
+  Link,
+  Navigate,
+  useNavigate,
+} from "@tanstack/react-router";
 import { useState } from "react";
 
 export const Route = createFileRoute("/signup")({
@@ -24,6 +30,7 @@ export const Route = createFileRoute("/signup")({
 });
 
 export default function SignupPage() {
+  const { isLoading, isAuthenticated } = useUser();
   const queryClient = useQueryClient();
   const navigate = useNavigate();
 
@@ -31,8 +38,7 @@ export default function SignupPage() {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [isEmailInvalid,setEmailInvalid] = useState(false);
-  
+  const [isEmailInvalid, setEmailInvalid] = useState(false);
 
   const signupMutation = useMutation({
     mutationFn: ({
@@ -51,11 +57,14 @@ export default function SignupPage() {
       navigate({ to: "/" });
     },
     onError(error) {
-      if (error.message === 'Email already in use'){
+      if (error.message === "Email already in use") {
         setEmailInvalid(true);
       }
     },
   });
+
+  if (isLoading) return null; // or a spinner
+  if (isAuthenticated) return <Navigate to="/" replace />;
 
   return (
     <div className="flex flex-1 flex-col min-h-fit w-full items-center justify-center p-6 md:p-10">
@@ -64,7 +73,9 @@ export default function SignupPage() {
           <CardHeader>
             <CardTitle>
               Heya stranger!
-              <br/>Create an account</CardTitle>
+              <br />
+              Create an account
+            </CardTitle>
             <CardDescription>
               Enter your details below to create an account.
             </CardDescription>
@@ -109,8 +120,8 @@ export default function SignupPage() {
                     required
                   />
                   {isEmailInvalid && (
-                      <FieldError>Email already in use! </FieldError>
-                    )}
+                    <FieldError>Email already in use! </FieldError>
+                  )}
                 </Field>
                 <Field>
                   <FieldLabel htmlFor="password">Password</FieldLabel>

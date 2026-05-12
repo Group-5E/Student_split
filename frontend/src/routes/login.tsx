@@ -14,9 +14,15 @@ import {
   FieldLabel,
 } from "@/components/ui/field";
 import { Input } from "@/components/ui/input";
+import { useUser } from "@/hooks/useUser";
 import API from "@/lib/api";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
+import {
+  createFileRoute,
+  Link,
+  Navigate,
+  useNavigate,
+} from "@tanstack/react-router";
 import { useState } from "react";
 
 export const Route = createFileRoute("/login")({
@@ -24,13 +30,14 @@ export const Route = createFileRoute("/login")({
 });
 
 function RouteComponent() {
+  const { isLoading, isAuthenticated } = useUser();
   const queryClient = useQueryClient();
   const navigate = useNavigate();
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [isPasswordInvalid, setIsPasswordInvalid] = useState(false);
-  const [isEmailInvalid,setEmailInvalid] = useState(false);
+  const [isEmailInvalid, setEmailInvalid] = useState(false);
 
   const loginMutation = useMutation({
     mutationFn: ({ email, password }: { email: string; password: string }) => {
@@ -45,12 +52,15 @@ function RouteComponent() {
       if (error.message === "Invalid credentials") {
         setIsPasswordInvalid(true);
         setPassword("");
-      }else if (error.message === 'user not found'){
+      } else if (error.message === "user not found") {
         setEmailInvalid(true);
         setPassword("");
       }
     },
   });
+
+  if (isLoading) return null; // or a spinner
+  if (isAuthenticated) return <Navigate to="/" replace />;
 
   return (
     <div className="flex flex-1 flex-col min-h-fit w-full items-center justify-center p-6 md:p-10">
@@ -74,8 +84,8 @@ function RouteComponent() {
                       type="email"
                       value={email}
                       onChange={(e) => {
-                        setEmail(e.target.value)
-                        setEmailInvalid(false)
+                        setEmail(e.target.value);
+                        setEmailInvalid(false);
                       }}
                       placeholder="m@example.com"
                       required

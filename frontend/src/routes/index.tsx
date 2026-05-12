@@ -8,7 +8,6 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { type ChartConfig } from "@/components/ui/chart";
 import {
   Dialog,
   DialogClose,
@@ -38,44 +37,15 @@ import {
 } from "@/components/ui/table";
 import { useUser } from "@/hooks/useUser";
 import API from "@/lib/api";
-import type { ExpenseResponse, UpcomingPayment } from "@/lib/types";
+import type {
+  ExpenseResponse,
+  HouseholdMember,
+  UpcomingPayment,
+} from "@/lib/types";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { MoonStar } from "lucide-react";
 import { useState } from "react";
-
-const chartData = [
-  { browser: "chrome", visitors: 275, fill: "var(--color-chrome)" },
-  { browser: "safari", visitors: 200, fill: "var(--color-safari)" },
-  { browser: "firefox", visitors: 187, fill: "var(--color-firefox)" },
-  { browser: "edge", visitors: 173, fill: "var(--color-edge)" },
-  { browser: "other", visitors: 90, fill: "var(--color-other)" },
-];
-const chartConfig = {
-  visitors: {
-    label: "Visitors",
-  },
-  chrome: {
-    label: "Chrome",
-    color: "var(--chart-1)",
-  },
-  safari: {
-    label: "Safari",
-    color: "var(--chart-2)",
-  },
-  firefox: {
-    label: "Firefox",
-    color: "var(--chart-3)",
-  },
-  edge: {
-    label: "Edge",
-    color: "var(--chart-4)",
-  },
-  other: {
-    label: "Other",
-    color: "var(--chart-5)",
-  },
-} satisfies ChartConfig;
 
 const getUpcomingExpenses = (
   expenses: ExpenseResponse[],
@@ -118,13 +88,19 @@ function Index() {
     enabled: !!user?.household_id,
   });
 
+  const { data: members } = useQuery({
+    queryKey: ["household-members"],
+    queryFn: () =>
+      API.req<HouseholdMember[]>(
+        `households/${user?.household_id}/members/list`,
+      ),
+    enabled: !!user?.household_id,
+  });
+
   const upcoming = expenses ? getUpcomingExpenses(expenses, user!.id) : [];
-  const next = upcoming[0];
-  console.log("upcoming", upcoming);
-  console.log("next", next);
 
   return (
-    <div className="w-full h-full flex flex-col items-center justify-center gap-12 px-4 py-16">
+    <div className="w-full h-full flex flex-col items-center justify-center gap-12 px-4 py-4">
       <Show when="signed-out">
         <Card className="w-64 max-w-sm">
           <CardHeader>
@@ -155,7 +131,7 @@ function Index() {
                     <Item variant={"outline"} key={expense.expenseId}>
                       <ItemContent>
                         <ItemTitle>{expense.description}</ItemTitle>
-                        <ItemDescription>{`${expense.amount} to ${expense.owedTo} due on ${expense.expenseDate.toLocaleDateString()}`}</ItemDescription>
+                        <ItemDescription>{`£${expense.amount} to ${expense.owedTo} due on ${expense.expenseDate.toLocaleDateString()}`}</ItemDescription>
                       </ItemContent>
                     </Item>
                   ))}
@@ -177,9 +153,26 @@ function Index() {
                 </>
               )}
             </QuestionCard>
-            <QuestionCard title="you're running out of...">
-              <p>nothing to show...</p>
-              <MoonStar className="size-1/4" />
+            <QuestionCard title="People in your household">
+              {members ? (
+                <div className="flex flex-col overflow-y-scroll w-full gap-2">
+                  {members
+                    .sort((a, b) => a.user_id - b.user_id)
+                    .map((member) => (
+                      <Item variant={"outline"} key={member.user_id}>
+                        <ItemContent>
+                          <ItemTitle>{member.name}</ItemTitle>
+                          <ItemDescription>{member.username}</ItemDescription>
+                        </ItemContent>
+                      </Item>
+                    ))}
+                </div>
+              ) : (
+                <>
+                  <p>nothing to show...</p>
+                  <MoonStar className="size-1/4" />
+                </>
+              )}
             </QuestionCard>
           </Card>
         </Show>
