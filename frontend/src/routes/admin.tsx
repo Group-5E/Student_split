@@ -124,7 +124,7 @@ function RouteComponent() {
           Admin Backend Functions
         </CardTitle>
         <CardContent className="flex flex-col gap-4">
-          <Button onClick={migrateUsers}>Create 10 Users</Button>
+          <Button onClick={addTenUsers}>Create 10 Users</Button>
           <Button onClick={migrateUsers}>Add Users To Household</Button>
           <HouseholdCard />
           <ExpenseCard />

@@ -97,7 +97,8 @@ function Index() {
     enabled: !!user?.household_id,
   });
 
-  const upcoming = expenses ? getUpcomingExpenses(expenses, user!.id) : [];
+  const upcoming =
+    expenses && user ? getUpcomingExpenses(expenses, user.id) : [];
 
   return (
     <div className="w-full h-full flex flex-col items-center justify-center gap-12 px-4 py-4">
