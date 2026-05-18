@@ -1,0 +1,46 @@
+test_login_missing_email (test_auth.LoginTestCase.test_login_missing_email)
+Missing email - should return a field error, not a 500. ... skipped 'Needs missing-field handling in the login route (currently raises KeyError -> 500)'
+
+test_login_missing_password (test_auth.LoginTestCase.test_login_missing_password)
+Missing password - should return a field error, not a 500. ... skipped 'Needs missing-field handling in the login route (currently raises KeyError -> 500)'
+
+test_login_sql_injection_email (test_auth.LoginTestCase.test_login_sql_injection_email)
+SQL injection string in email - SQLAlchemy parameterises the query so no row is ... ok
+
+test_login_success (test_auth.LoginTestCase.test_login_success)
+Valid email + valid password - should grant access and return success. ... ok
+
+test_login_unregistered_email (test_auth.LoginTestCase.test_login_unregistered_email)
+Email not in the database - should return 401 'user not found'. ... ok
+
+test_login_unregistered_email_wrong_password (test_auth.LoginTestCase.test_login_unregistered_email_wrong_password)
+Unregistered email + wrong password - email is checked first so 'user not found' ... ok
+
+test_login_wrong_password (test_auth.LoginTestCase.test_login_wrong_password)
+Correct email + wrong password - should return 401 'Invalid credentials'. ... ok
+
+test_register_duplicate_email (test_auth.RegisterTestCase.test_register_duplicate_email)
+Already-registered email - should be rejected with 'Email already in use'. ... ok
+
+test_register_invalid_email_format (test_auth.RegisterTestCase.test_register_invalid_email_format)
+Invalid email format (e.g. 'fakeuser#looroll') - should be rejected. ... skipped 'Needs email-format validation in the register route'
+
+test_register_invalid_email_prioritised_over_missing_password (test_auth.RegisterTestCase.test_register_invalid_email_prioritised_over_missing_password)
+Invalid email + missing password - email error should be returned first. ... skipped 'Needs email-format validation in the register route (email error should be prioritised)'
+
+test_register_missing_email (test_auth.RegisterTestCase.test_register_missing_email)
+Missing email - should return a field error, not a 500. ... skipped 'Needs missing-field handling in the register route (currently raises KeyError -> 500)'
+
+test_register_missing_password (test_auth.RegisterTestCase.test_register_missing_password)
+Missing password - should return a field error, not a 500. ... skipped 'Needs missing-field handling in the register route (currently raises KeyError -> 500)'
+
+test_register_sql_injection_email (test_auth.RegisterTestCase.test_register_sql_injection_email)
+SQL injection in email field - should be rejected, not create an account. ... skipped 'Needs email-format validation in the register route - SQL injection string is currently accepted and an account is created'
+
+test_register_success (test_auth.RegisterTestCase.test_register_success)
+Valid email + valid password - account should be created and return success. ... ok
+
+----------------------------------------------------------------------
+Ran 14 tests in 2.564s
+
+OK (skipped=7)
