@@ -1,46 +1,66 @@
-test_login_missing_email (test_auth.LoginTestCase.test_login_missing_email)
-Missing email - should return a field error, not a 500. ... skipped 'Needs missing-field handling in the login route (currently raises KeyError -> 500)'
+==== test session starts ====
+platform darwin -- Python 3.13.5, pytest-8.3.4, pluggy-1.5.0 -- /opt/anaconda3/bin/python
+cachedir: .pytest_cache
+rootdir: /Users/david/Documents/GitHub/Untitled/backend
+plugins: anyio-4.7.0
+collecting ... collected 48 items
 
-test_login_missing_password (test_auth.LoginTestCase.test_login_missing_password)
-Missing password - should return a field error, not a 500. ... skipped 'Needs missing-field handling in the login route (currently raises KeyError -> 500)'
+tests/test_auth.py::RegisterTestCase::test_register_duplicate_email PASSED [  2%]
+tests/test_auth.py::RegisterTestCase::test_register_invalid_email_format SKIPPED [  4%]
+tests/test_auth.py::RegisterTestCase::test_register_invalid_email_prioritised_over_missing_password SKIPPED [  6%]
+tests/test_auth.py::RegisterTestCase::test_register_invalid_password SKIPPED [  8%]
+tests/test_auth.py::RegisterTestCase::test_register_missing_email SKIPPED [ 10%]
+tests/test_auth.py::RegisterTestCase::test_register_missing_password SKIPPED [ 12%]
+tests/test_auth.py::RegisterTestCase::test_register_sql_injection_email SKIPPED [ 14%]
+tests/test_auth.py::RegisterTestCase::test_register_success PASSED       [ 16%]
+tests/test_auth.py::LoginTestCase::test_login_missing_email SKIPPED      [ 18%]
+tests/test_auth.py::LoginTestCase::test_login_missing_password SKIPPED   [ 20%]
+tests/test_auth.py::LoginTestCase::test_login_sql_injection_email PASSED [ 22%]
+tests/test_auth.py::LoginTestCase::test_login_success PASSED             [ 25%]
+tests/test_auth.py::LoginTestCase::test_login_unregistered_email PASSED  [ 27%]
+tests/test_auth.py::LoginTestCase::test_login_unregistered_email_wrong_password PASSED [ 29%]
+tests/test_auth.py::LoginTestCase::test_login_wrong_password PASSED      [ 31%]
+tests/test_households.py::CreateHouseholdTestCase::test_create_empty_name PASSED [ 33%]
+tests/test_households.py::CreateHouseholdTestCase::test_create_invalid_address_format SKIPPED [ 35%]
+tests/test_households.py::CreateHouseholdTestCase::test_create_invalid_name_special_chars SKIPPED [ 37%]
+tests/test_households.py::CreateHouseholdTestCase::test_create_missing_address SKIPPED [ 39%]
+tests/test_households.py::CreateHouseholdTestCase::test_create_missing_name PASSED [ 41%]
+tests/test_households.py::CreateHouseholdTestCase::test_create_sql_injection_name PASSED [ 43%]
+tests/test_households.py::CreateHouseholdTestCase::test_create_valid_name_and_address PASSED [ 45%]
+tests/test_households.py::CreateHouseholdTestCase::test_create_valid_name_only PASSED [ 47%]
+tests/test_account.py::AccountUpdateTestCase::test_update_duplicate_email SKIPPED [ 50%]
+tests/test_account.py::AccountUpdateTestCase::test_update_empty_email_leaves_unchanged SKIPPED [ 52%]
+tests/test_account.py::AccountUpdateTestCase::test_update_empty_username_blocked SKIPPED [ 54%]
+tests/test_account.py::AccountUpdateTestCase::test_update_invalid_email_format SKIPPED [ 56%]
+tests/test_account.py::AccountUpdateTestCase::test_update_same_username_rejected SKIPPED [ 58%]
+tests/test_account.py::AccountUpdateTestCase::test_update_username_special_chars SKIPPED [ 60%]
+tests/test_account.py::AccountUpdateTestCase::test_update_username_too_long SKIPPED [ 62%]
+tests/test_account.py::AccountUpdateTestCase::test_update_valid_email PASSED [ 64%]
+tests/test_account.py::AccountUpdateTestCase::test_update_valid_username PASSED [ 66%]
+tests/test_expenses.py::CreateExpenseTestCase::test_create_decimal_amount PASSED [ 68%]
+tests/test_expenses.py::CreateExpenseTestCase::test_create_description_too_long SKIPPED [ 70%]
+tests/test_expenses.py::CreateExpenseTestCase::test_create_empty_splits_rejected PASSED [ 72%]
+tests/test_expenses.py::CreateExpenseTestCase::test_create_equal_split PASSED [ 75%]
+tests/test_expenses.py::CreateExpenseTestCase::test_create_fixed_split PASSED [ 77%]
+tests/test_expenses.py::CreateExpenseTestCase::test_create_fixed_split_total_below_amount SKIPPED [ 79%]
+tests/test_expenses.py::CreateExpenseTestCase::test_create_fixed_split_total_exceeds_amount SKIPPED [ 81%]
+tests/test_expenses.py::CreateExpenseTestCase::test_create_large_amount PASSED [ 83%]
+tests/test_expenses.py::CreateExpenseTestCase::test_create_missing_amount PASSED [ 85%]
+tests/test_expenses.py::CreateExpenseTestCase::test_create_missing_category_defaults_to_other PASSED [ 87%]
+tests/test_expenses.py::CreateExpenseTestCase::test_create_missing_description PASSED [ 89%]
+tests/test_expenses.py::CreateExpenseTestCase::test_create_missing_split_type_defaults_to_equal PASSED [ 91%]
+tests/test_expenses.py::CreateExpenseTestCase::test_create_negative_amount SKIPPED [ 93%]
+tests/test_expenses.py::CreateExpenseTestCase::test_create_percentage_split PASSED [ 95%]
+tests/test_expenses.py::CreateExpenseTestCase::test_create_positive_amount PASSED [ 97%]
+tests/test_expenses.py::CreateExpenseTestCase::test_create_valid_description PASSED [100%]
 
-test_login_sql_injection_email (test_auth.LoginTestCase.test_login_sql_injection_email)
-SQL injection string in email - SQLAlchemy parameterises the query so no row is ... ok
+==== warnings summary ====
+tests/test_auth.py: 2 warnings
+tests/test_households.py: 5 warnings
+tests/test_account.py: 2 warnings
+tests/test_expenses.py: 36 warnings
+  /Users/david/Documents/GitHub/Untitled/backend/project/models/base.py:12: LegacyAPIWarning: The Query.get() method is considered legacy as of the 1.x series of SQLAlchemy and becomes a legacy construct in 2.0. The method is now available as Session.get() (deprecated since: 2.0) (Background on SQLAlchemy 2.0 at: https://sqlalche.me/e/b8d9)
+    return User.query.get(int(user_id))
 
-test_login_success (test_auth.LoginTestCase.test_login_success)
-Valid email + valid password - should grant access and return success. ... ok
-
-test_login_unregistered_email (test_auth.LoginTestCase.test_login_unregistered_email)
-Email not in the database - should return 401 'user not found'. ... ok
-
-test_login_unregistered_email_wrong_password (test_auth.LoginTestCase.test_login_unregistered_email_wrong_password)
-Unregistered email + wrong password - email is checked first so 'user not found' ... ok
-
-test_login_wrong_password (test_auth.LoginTestCase.test_login_wrong_password)
-Correct email + wrong password - should return 401 'Invalid credentials'. ... ok
-
-test_register_duplicate_email (test_auth.RegisterTestCase.test_register_duplicate_email)
-Already-registered email - should be rejected with 'Email already in use'. ... ok
-
-test_register_invalid_email_format (test_auth.RegisterTestCase.test_register_invalid_email_format)
-Invalid email format (e.g. 'fakeuser#looroll') - should be rejected. ... skipped 'Needs email-format validation in the register route'
-
-test_register_invalid_email_prioritised_over_missing_password (test_auth.RegisterTestCase.test_register_invalid_email_prioritised_over_missing_password)
-Invalid email + missing password - email error should be returned first. ... skipped 'Needs email-format validation in the register route (email error should be prioritised)'
-
-test_register_missing_email (test_auth.RegisterTestCase.test_register_missing_email)
-Missing email - should return a field error, not a 500. ... skipped 'Needs missing-field handling in the register route (currently raises KeyError -> 500)'
-
-test_register_missing_password (test_auth.RegisterTestCase.test_register_missing_password)
-Missing password - should return a field error, not a 500. ... skipped 'Needs missing-field handling in the register route (currently raises KeyError -> 500)'
-
-test_register_sql_injection_email (test_auth.RegisterTestCase.test_register_sql_injection_email)
-SQL injection in email field - should be rejected, not create an account. ... skipped 'Needs email-format validation in the register route - SQL injection string is currently accepted and an account is created'
-
-test_register_success (test_auth.RegisterTestCase.test_register_success)
-Valid email + valid password - account should be created and return success. ... ok
-
-----------------------------------------------------------------------
-Ran 14 tests in 2.564s
-
-OK (skipped=7)
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+==== 26 passed, 22 skipped, 45 warnings in 1.60s ====

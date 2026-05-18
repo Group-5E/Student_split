@@ -44,9 +44,7 @@ class RegisterTestCase(unittest.TestCase):
     def _logout(self):
         return self.client.post('/api/auth/logout')
 
-    # ------------------------------------------------------------------
     # Testable cases
-    # ------------------------------------------------------------------
 
     def test_register_success(self):
         """Valid email + valid password - account should be created and return success."""
@@ -63,9 +61,7 @@ class RegisterTestCase(unittest.TestCase):
         self.assertEqual(response.status_code, 400)
         self.assertEqual(data['error'], 'Email already in use')
 
-    # ------------------------------------------------------------------
     # Cases that require route-level input validation to work correctly.
-    # ------------------------------------------------------------------
 
     @unittest.skip("Needs email-format validation in the register route")
     def test_register_invalid_email_format(self):
@@ -96,6 +92,14 @@ class RegisterTestCase(unittest.TestCase):
         response = self._register({**DEFAULT_REGISTER_PAYLOAD, 'password': ''})
         data = response.get_json()
         self.assertEqual(response.status_code, 400)
+
+    @unittest.skip("Needs password-strength validation in the register route - weak password (e.g. 'm') is currently accepted")
+    def test_register_invalid_password(self):
+        """Valid email but too-short/weak password (e.g. 'm') - should be rejected."""
+        response = self._register({**DEFAULT_REGISTER_PAYLOAD, 'password': 'm'})
+        data = response.get_json()
+        self.assertEqual(response.status_code, 400)
+        self.assertIn('password', data.get('error', '').lower())
 
     @unittest.skip("Needs email-format validation in the register route - SQL injection string is currently accepted and an account is created")
     def test_register_sql_injection_email(self):
@@ -142,9 +146,7 @@ class LoginTestCase(unittest.TestCase):
         self._register()
         self._logout()
 
-    # ------------------------------------------------------------------
     # Testable cases
-    # ------------------------------------------------------------------
 
     def test_login_success(self):
         """Valid email + valid password - should grant access and return success."""
@@ -185,9 +187,7 @@ class LoginTestCase(unittest.TestCase):
         self.assertEqual(response.status_code, 401)
         self.assertEqual(data['error'], 'user not found')
 
-    # ------------------------------------------------------------------
     # Cases that require route-level input validation to work correctly.
-    # ------------------------------------------------------------------
 
     @unittest.skip("Needs missing-field handling in the login route (currently raises KeyError -> 500)")
     def test_login_missing_email(self):
