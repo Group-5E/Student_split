@@ -148,7 +148,7 @@ function RouteComponent() {
   if (!user?.household_id) {
     return (
       <div className="h-full w-full p-5 flex items-center justify-center">
-        <Card>
+        <Card className="w-full h-full">
           <CardHeader>
             <CardTitle>No Household</CardTitle>
             <CardDescription>
