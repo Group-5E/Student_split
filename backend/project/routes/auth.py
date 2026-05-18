@@ -10,7 +10,7 @@ auth_bp = Blueprint('auth', __name__)
 def register():
     body = request.get_json()
     existing = User.query.filter_by(email=body['email']).first()
-    print(f"user for {body['email']}: {existing}")
+    # print(f"user for {body['email']}: {existing}")
     if existing:
         return jsonify({ 'error': 'Email already in use' }), 400
     user = User(
